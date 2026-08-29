@@ -28,7 +28,7 @@ export function ImpactNumbers() {
       </div>
 
       <Container className="relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-4 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-8">
           {impactMetrics.slice(0, 4).map((item, index) => (
             <motion.div 
               key={index}

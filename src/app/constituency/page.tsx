@@ -14,10 +14,10 @@ export default function ConstituencyPage() {
   return (
     <div className="min-h-screen bg-off-white">
       <div className="relative pt-32 pb-32 border-b border-border overflow-hidden bg-dark">
-        {mediaRegistry.constituency.flagHoisting.status === "available" && (
+        {mediaRegistry.people.interaction2.status === "available" && (
           <div className="absolute inset-0 z-0 pointer-events-none">
             <Image 
-              src={mediaRegistry.constituency.flagHoisting.src} 
+              src={mediaRegistry.people.interaction2.src} 
               alt="Constituency Background"
               fill
               className="object-cover object-[center_30%]"
