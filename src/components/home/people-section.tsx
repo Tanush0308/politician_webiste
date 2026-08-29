@@ -11,8 +11,20 @@ export function PeopleSection() {
   const photo1 = mediaRegistry.people.interaction1;
 
   return (
-    <section className="py-24 md:py-32 bg-white text-dark relative border-y border-border">
-      <Container>
+    <section className="py-24 md:py-32 bg-primary/5 text-dark relative border-y border-border overflow-hidden">
+      {/* Background Image Watermark */}
+      {mediaRegistry.journey.interaction.status === "available" && (
+        <div className="absolute inset-0 z-0 pointer-events-none mix-blend-multiply">
+          <Image 
+            src={mediaRegistry.journey.interaction.src} 
+            alt="Crowd Background"
+            fill
+            className="object-cover object-center opacity-10"
+          />
+        </div>
+      )}
+      
+      <Container className="relative z-10">
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center">
           
           {/* Typography / Narrative Side */}
@@ -41,7 +53,7 @@ export function PeopleSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="absolute inset-0 border border-border bg-off-white overflow-hidden"
+              className="absolute inset-0 border border-border bg-white shadow-xl overflow-hidden rounded-2xl"
             >
               {photo1.status === "available" ? (
                 <>
@@ -52,7 +64,7 @@ export function PeopleSection() {
                     className="object-cover object-center"
                   />
                   {photo1.caption && (
-                    <div className="absolute bottom-0 left-0 bg-white/90 backdrop-blur-md px-6 py-4 border-t border-r border-border text-[12px] md:text-[14px] uppercase tracking-widest font-bold">
+                    <div className="absolute bottom-0 left-0 bg-white/90 backdrop-blur-md px-6 py-4 border-t border-r border-border text-[12px] md:text-[14px] uppercase tracking-widest font-bold rounded-tr-2xl">
                       {photo1.caption}
                     </div>
                   )}
