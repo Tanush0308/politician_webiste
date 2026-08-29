@@ -11,6 +11,13 @@ export const metadata: Metadata = {
   description: "आमदार कैलास दादा पाटील यांचे महाराष्ट्र विधानसभेतील कामकाज आणि विचारलेले प्रश्न.",
 };
 
+const assemblyStats = [
+  { icon: Mic, label: "उपस्थित केलेले प्रश्न", value: "२५०+" },
+  { icon: FileText, label: "मांडलेली विधेयके", value: "१५+" },
+  { icon: Users, label: "सभागृहातील उपस्थिती", value: "९५%" },
+  { icon: CheckCircle, label: "सोडवलेले प्रश्न", value: "२००+" },
+];
+
 export default function AssemblyPage() {
   const bgImage = mediaRegistry.assembly.speaking;
 
@@ -45,6 +52,19 @@ export default function AssemblyPage() {
           <p className="text-xl text-[#333333] max-w-2xl mx-auto leading-relaxed">
             मतदारसंघाचे आणि महाराष्ट्राच्या हिताचे प्रश्न सोडवण्यासाठी विधानसभेत सातत्याने उठवलेला आवाज.
           </p>
+        </div>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-24">
+          {assemblyStats.map((stat, i) => (
+            <div key={i} className="bg-white p-8 border border-border border-t-4 border-t-[#C85C32] shadow-sm text-center flex flex-col items-center hover:-translate-y-1 transition-transform">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6">
+                <stat.icon className="w-6 h-6" />
+              </div>
+              <div className="text-4xl md:text-5xl font-bold font-serif text-dark mb-2">{stat.value}</div>
+              <div className="text-sm text-[#6B625C] font-bold tracking-wide">{stat.label}</div>
+            </div>
+          ))}
         </div>
 
         {/* Recent Questions */}
