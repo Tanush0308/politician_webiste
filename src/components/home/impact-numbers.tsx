@@ -5,63 +5,50 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { impactMetrics } from "@/data/impact";
-import { ImpactMetric } from "@/types/content";
 import { mediaRegistry } from "@/data/media";
 
-function StatItem({ metric }: { metric: ImpactMetric }) {
-  const isVerified = metric.verification === "verified";
-
-  return (
-    <div className="p-8 md:p-12 flex flex-col justify-between aspect-square md:aspect-auto md:h-full group hover:bg-white/5 transition-colors relative border-b border-white/10 md:border-b-0">
-      <div className="text-[14px] uppercase tracking-[0.2em] text-white/50 font-sans font-bold mb-8">
-        {metric.label}
-      </div>
-      <div>
-        {isVerified ? (
-          <div className="text-[clamp(3.5rem,5vw,6rem)] font-bold font-serif tracking-tighter leading-none mb-4 text-primary">
-            {metric.value}
-          </div>
-        ) : (
-          <div className="text-[14px] md:text-base font-bold font-sans text-white/50 tracking-widest uppercase border border-white/20 p-2 inline-block mb-4">
-            DATA PENDING
-          </div>
-        )}
-        <div className="text-[18px] text-white/80 font-sans leading-relaxed max-w-[90%] drop-shadow-md">
-          {metric.description}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export function ImpactNumbers() {
-  const displayMetrics = impactMetrics.slice(0, 4);
-  
-  return (
-    <section className="bg-dark relative border-y border-border overflow-hidden">
-      {/* Background Image Watermark */}
-      {mediaRegistry.journey.campaign.status === "available" && (
-        <div className="absolute inset-0 z-0 pointer-events-none mix-blend-overlay">
-          <Image 
-            src={mediaRegistry.journey.campaign.src} 
-            alt="Campaign Background"
-            fill
-            className="object-cover object-center opacity-30 grayscale"
-          />
-        </div>
-      )}
+  const impactBg = mediaRegistry.journey?.campaign?.status === "available" 
+    ? mediaRegistry.journey.campaign.src 
+    : undefined;
 
-      <Container className="relative z-10 px-0 sm:px-6 lg:px-8">
-        <div className={`grid grid-cols-2 md:grid-cols-${Math.min(displayMetrics.length, 4)} divide-x divide-y md:divide-y-0 divide-white/10`}>
-          {displayMetrics.map((metric, idx) => (
-            <motion.div
-              key={metric.label}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+  return (
+    <section className="relative py-24 bg-dark overflow-hidden">
+      {/* Background with Dark Overlay */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {impactBg && (
+          <Image 
+            src={impactBg}
+            alt=""
+            fill
+            className="object-cover opacity-[0.15] grayscale mix-blend-overlay"
+          />
+        )}
+        <div className="absolute inset-0 bg-dark/80"></div>
+      </div>
+
+      <Container className="relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-4 lg:gap-8">
+          {impactMetrics.slice(0, 4).map((item, index) => (
+            <motion.div 
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1, duration: 0.5 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="flex flex-col items-center justify-center p-8 border border-white/15 text-center group"
             >
-              <StatItem metric={metric} />
+              <div className="text-5xl md:text-6xl font-bold font-serif text-primary mb-4 tracking-tight group-hover:scale-105 transition-transform">
+                {item.value}
+              </div>
+              
+              <h3 className="text-xl font-bold text-white mb-2">
+                {item.label}
+              </h3>
+              
+              <p className="text-[#D8D3CC] text-sm leading-relaxed max-w-[200px]">
+                {item.description}
+              </p>
             </motion.div>
           ))}
         </div>

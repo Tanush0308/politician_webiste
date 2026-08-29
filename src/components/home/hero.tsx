@@ -1,106 +1,73 @@
 "use client";
 
 import * as React from "react";
-import { motion } from "framer-motion";
-import { ArrowDownRight } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
-import { Container } from "../ui/container";
-import { MediaPlaceholder } from "../ui/media-placeholder";
+import { Container } from "@/components/ui/container";
 import { personData } from "@/data/person";
-import { mediaRegistry } from "@/data/media";
+import { motion } from "framer-motion";
 
 export function Hero() {
-  const heroMedia = mediaRegistry.hero.main;
-
   return (
-    <section className="relative min-h-[90vh] w-full bg-[#FAF8F5] flex flex-col justify-center overflow-hidden pt-24 md:pt-32 border-b border-border/50">
+    <section className="relative min-h-[90vh] flex items-center pt-24 pb-16 overflow-hidden">
       
-      {/* Background Video */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      {/* Background Video Layer */}
+      <div className="absolute inset-0 z-0">
         <video 
           autoPlay 
           loop 
           muted 
-          playsInline 
-          className="absolute min-w-full min-h-full object-cover top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-100"
+          playsInline
+          className="object-cover w-full h-full"
         >
           <source src="/videos/hero_video.mp4" type="video/mp4" />
         </video>
-        {/* Soft gradient overlay to ensure text legibility at edges if needed */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white/40 to-transparent"></div>
+        {/* Beige/Warm White Overlay for text readability but keeping video visible */}
+        <div className="absolute inset-0 bg-[#FAF9F6]/60 mix-blend-normal"></div>
+        {/* Subtle gradient to anchor text */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#FAF9F6]/90 via-[#FAF9F6]/50 to-transparent"></div>
       </div>
 
-      <Container className="relative z-10 flex-1 flex flex-col justify-center pb-12 md:pb-24">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24 w-full">
+      <Container className="relative z-10 w-full h-full">
+        <div className="max-w-4xl h-full flex flex-col justify-center">
           
-          {/* Typography Side */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="w-full lg:w-1/2 flex flex-col bg-white/70 p-8 md:p-10 rounded-3xl backdrop-blur-md border border-white shadow-xl"
           >
-            <div className="flex flex-col space-y-2 mb-6 md:mb-8">
-              <span className="text-primary text-[14px] md:text-[16px] font-bold tracking-[0.1em] uppercase">
-                आमदार
+            <div className="inline-flex items-center gap-3 px-4 py-2 bg-white border border-[#EFE6DA] shadow-sm mb-8">
+              <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+              <span className="text-sm font-bold tracking-widest text-[#151515] uppercase font-sans">
+                {personData.party}
               </span>
             </div>
-
-            <h1 className="font-bold font-serif text-dark tracking-tight leading-[1] mb-8 text-[clamp(3.5rem,7vw,7rem)] drop-shadow-sm">
-              {personData.nameMr}
+            
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-[#151515] leading-[1.1] mb-6 tracking-tight drop-shadow-sm">
+              <span className="block mb-2">{personData.nameMr.split(' ')[0]} {personData.nameMr.split(' ')[1]}</span>
+              <span className="text-primary">{personData.nameMr.split(' ')[2]}</span>
             </h1>
             
-            <p className="text-[20px] md:text-[24px] text-dark/80 font-sans max-w-lg leading-[1.6] mb-12 font-medium">
-              धाराशिव आणि कळंबच्या विकासासाठी आणि नागरिकांच्या प्रश्नांसाठी सातत्याने कार्यरत.
+            <p className="text-xl md:text-2xl text-[#333333] font-medium leading-relaxed max-w-2xl mb-12 font-sans drop-shadow-sm">
+              {personData.designation}
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-wrap items-center gap-6">
               <Link 
-                href="/journey" 
-                className="group flex items-center justify-center gap-4 bg-primary text-white px-8 py-4 font-bold tracking-wide hover:bg-accent-hover transition-colors rounded-xl shadow-lg"
+                href="/initiatives" 
+                className="bg-primary text-white hover:bg-[#C85C32] px-8 py-4 text-base font-bold transition-colors shadow-md"
               >
-                <span>माझा प्रवास</span>
+                माझी कामं पहा
               </Link>
               
               <Link 
-                href="/initiatives" 
-                className="group flex items-center justify-center gap-4 bg-white/90 text-dark px-8 py-4 font-bold tracking-wide border border-border hover:border-dark transition-colors rounded-xl shadow-sm hover:bg-white"
+                href="/journey" 
+                className="bg-white/80 backdrop-blur-sm border border-[#151515] text-[#151515] hover:bg-[#151515] hover:text-white px-8 py-4 text-base font-bold transition-all"
               >
-                <span>माझी कामं</span>
+                माझा प्रवास
               </Link>
             </div>
           </motion.div>
-
-          {/* Image Side */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="w-full lg:w-1/2 relative aspect-[4/5] md:aspect-square lg:aspect-[3/4] max-h-[800px]"
-          >
-            <div className="absolute inset-0 bg-white shadow-2xl p-4 md:p-6 transform rotate-2 rounded-2xl border border-white/50">
-              <div className="relative w-full h-full overflow-hidden rounded-xl">
-                {heroMedia.status === "available" ? (
-                  <Image 
-                    src={heroMedia.src} 
-                    alt={heroMedia.alt} 
-                    fill 
-                    className="object-cover object-[center_20%]"
-                    priority
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                ) : (
-                  <MediaPlaceholder 
-                    category="HERO IMAGE" 
-                    aspectRatio="auto" 
-                    className="h-full w-full border-none"
-                  />
-                )}
-              </div>
-            </div>
-          </motion.div>
-
+          
         </div>
       </Container>
     </section>

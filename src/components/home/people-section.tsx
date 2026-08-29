@@ -11,15 +11,15 @@ export function PeopleSection() {
   const photo1 = mediaRegistry.people.interaction1;
 
   return (
-    <section className="py-24 md:py-32 bg-primary/5 text-dark relative border-y border-border overflow-hidden">
+    <section className="py-24 md:py-32 bg-off-white text-dark relative border-b border-border overflow-hidden">
       {/* Background Image Watermark */}
       {mediaRegistry.journey.interaction.status === "available" && (
-        <div className="absolute inset-0 z-0 pointer-events-none mix-blend-multiply">
+        <div className="absolute inset-0 z-0 pointer-events-none mix-blend-multiply opacity-[0.03]">
           <Image 
             src={mediaRegistry.journey.interaction.src} 
             alt="Crowd Background"
             fill
-            className="object-cover object-center opacity-10"
+            className="object-cover object-center"
           />
         </div>
       )}
@@ -35,10 +35,11 @@ export function PeopleSection() {
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold leading-[1.1] tracking-tight mb-8 text-dark">
               लोकांमध्ये.<br/>लोकांसोबत.
             </h2>
-            <p className="text-dark/80 text-[18px] leading-[1.7] font-sans mb-10 max-w-sm">
+            <div className="w-16 h-1 bg-primary mb-8"></div>
+            <p className="text-[#333333] text-[18px] leading-[1.7] font-sans mb-10 max-w-sm">
               राजकारण हे केवळ सत्तेसाठी नाही, तर लोकांच्या अडीअडचणी सोडवण्यासाठी आहे. प्रत्येक घटकापर्यंत पोहोचून त्यांचे प्रश्न समजून घेणे आणि ते सोडवणे हेच आमचे उद्दिष्ट आहे.
             </p>
-            <div className="flex items-center gap-6 text-[12px] md:text-[14px] uppercase tracking-[0.2em] text-muted font-bold">
+            <div className="flex items-center gap-6 text-[12px] md:text-[14px] uppercase tracking-[0.2em] text-[#C85C32] font-bold">
               <span>धाराशिव</span>
               <span>•</span>
               <span>कळंब</span>
@@ -53,7 +54,7 @@ export function PeopleSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="absolute inset-0 border border-border bg-white shadow-xl overflow-hidden rounded-2xl"
+              className="absolute inset-0 border border-border bg-white shadow-sm overflow-hidden border-t-4 border-t-[#C85C32]"
             >
               {photo1.status === "available" ? (
                 <>
@@ -64,7 +65,7 @@ export function PeopleSection() {
                     className="object-cover object-center"
                   />
                   {photo1.caption && (
-                    <div className="absolute bottom-0 left-0 bg-white/90 backdrop-blur-md px-6 py-4 border-t border-r border-border text-[12px] md:text-[14px] uppercase tracking-widest font-bold rounded-tr-2xl">
+                    <div className="absolute bottom-0 left-0 bg-white px-6 py-4 border-t border-r border-border text-[12px] md:text-[14px] uppercase tracking-widest font-bold">
                       {photo1.caption}
                     </div>
                   )}
