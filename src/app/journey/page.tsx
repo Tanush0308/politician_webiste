@@ -8,8 +8,8 @@ import { SectionTitle } from "@/components/typography/section-title";
 import { journeyEvents } from "@/data/journey";
 import { JourneyEvent } from "@/types/content";
 import { MediaPlaceholder } from "@/components/ui/media-placeholder";
+import { mediaRegistry } from "@/data/media";
 
-// Extracted component to manage individual intersection observers
 function TimelineItem({ 
   event, 
   setActiveYear 
@@ -27,30 +27,17 @@ function TimelineItem({
   }, [isInView, event.year, setActiveYear]);
 
   return (
-    <div ref={ref} className="py-24 border-b border-white/10 last:border-b-0">
+    <div ref={ref} className="py-24 border-b border-border last:border-b-0">
       {/* Mobile Year (Hidden on Desktop) */}
-      <div className="lg:hidden text-accent font-bold text-4xl mb-4 font-serif">
+      <div className="lg:hidden text-primary font-bold text-5xl mb-6 font-serif">
         {event.year}
       </div>
       
-      <h3 className="text-3xl lg:text-4xl font-bold text-white mb-6 font-serif leading-tight">
+      <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-dark mb-8 font-serif leading-tight">
         {event.title}
       </h3>
       
-      <div className="w-full aspect-[16/9] mb-8 relative overflow-hidden bg-dark/20 border border-white/5">
-        {event.image?.status === "available" ? (
-          <Image
-            src={event.image.src}
-            alt={event.image.alt}
-            fill
-            className="object-cover object-center grayscale hover:grayscale-0 transition-all duration-700"
-          />
-        ) : (
-          <MediaPlaceholder category={`JOURNEY / ${event.year}`} aspectRatio="auto" className="border-none" />
-        )}
-      </div>
-
-      <p className="text-light/70 text-lg leading-relaxed font-sans max-w-2xl">
+      <p className="text-[18px] md:text-[20px] text-dark/80 leading-[1.8] font-sans max-w-3xl">
         {event.description}
       </p>
     </div>
@@ -63,13 +50,26 @@ export default function JourneyPage() {
   );
 
   return (
-    <div className="bg-dark min-h-screen">
-      <div className="pt-32 pb-16 border-b border-white/10">
-        <Container>
+    <div className="bg-off-white min-h-screen">
+      <div className="relative pt-32 pb-24 border-b border-border overflow-hidden bg-off-white">
+        {mediaRegistry.journey.wari.status === "available" && (
+          <div className="absolute inset-0 z-0 pointer-events-none mix-blend-multiply">
+            <Image 
+              src={mediaRegistry.journey.wari.src} 
+              alt="Wari Background"
+              fill
+              className="object-cover object-center opacity-25"
+            />
+            {/* Soft gradient to fade out bottom */}
+            <div className="absolute inset-0 bg-gradient-to-t from-off-white via-transparent to-transparent"></div>
+          </div>
+        )}
+        <Container className="relative z-10">
           <SectionTitle 
             title="माझा प्रवास"
             eyebrow="एक संघर्षशील नेतृत्व"
             subtitle="एका सामान्य शेतकरी कुटुंबातून आलेले नेतृत्व ते धाराशिवचे आमदार. जनतेच्या सेवेसाठी समर्पित असलेला हा प्रवास."
+            className="text-dark"
           />
         </Container>
       </div>
@@ -78,14 +78,14 @@ export default function JourneyPage() {
         <div className="flex flex-col lg:flex-row min-h-screen">
           
           {/* Left Column (Sticky Year - Desktop Only) */}
-          <div className="hidden lg:block lg:w-[40%] relative border-r border-white/10">
+          <div className="hidden lg:block lg:w-[40%] relative border-r border-border">
             <div className="sticky top-1/2 -translate-y-1/2 p-12 lg:p-20 text-center">
               <motion.div
                 key={activeYear}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-7xl xl:text-9xl font-bold font-serif text-accent tracking-tighter"
+                className="text-7xl xl:text-9xl font-bold font-serif text-primary tracking-tighter"
               >
                 {activeYear}
               </motion.div>

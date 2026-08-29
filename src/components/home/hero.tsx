@@ -14,87 +14,76 @@ export function Hero() {
   const heroMedia = mediaRegistry.hero.main;
 
   return (
-    <section className="relative h-screen w-full bg-dark flex flex-col">
-      {/* Background Image / Video Full Viewport */}
-      <div className="absolute inset-0 z-0">
-        {heroMedia.status === "available" ? (
-          <Image 
-            src={heroMedia.src} 
-            alt={heroMedia.alt} 
-            fill 
-            className="object-cover object-[center_20%]"
-            priority
-          />
-        ) : (
-          <MediaPlaceholder 
-            category="HERO BACKGROUND" 
-            aspectRatio="auto" 
-            className="h-full w-full border-none"
-          />
-        )}
-        
-        {/* Subtle gradient only at bottom and left to ensure text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-dark/80 via-dark/20 to-transparent" />
-      </div>
-
-      <Container className="relative z-10 flex-1 flex flex-col justify-end pb-12 md:pb-24 pt-32">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 w-full">
+    <section className="relative min-h-[90vh] w-full bg-off-white flex flex-col justify-center overflow-hidden pt-24 md:pt-32">
+      <Container className="relative z-10 flex-1 flex flex-col justify-center pb-12 md:pb-24">
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24 w-full">
           
-          {/* Left Anchored Typography */}
+          {/* Typography Side */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="max-w-3xl"
+            className="w-full lg:w-1/2 flex flex-col"
           >
-            <div className="flex flex-col space-y-2 mb-6">
-              <span className="text-accent text-[10px] sm:text-xs font-semibold tracking-[0.2em] uppercase">
-                {personData.location}
-              </span>
-              <span className="text-light/70 text-[10px] sm:text-xs font-medium tracking-widest uppercase">
-                PUBLIC SERVICE / POLITICAL JOURNEY
+            <div className="flex flex-col space-y-2 mb-6 md:mb-8">
+              <span className="text-accent text-[14px] md:text-[16px] font-bold tracking-[0.1em] uppercase">
+                आमदार
               </span>
             </div>
 
-            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[120px] font-bold font-serif text-white tracking-tight leading-[0.85] mb-6">
-              {/* Replace literal spaces with breaks for stylistic vertical layout or keep as is if we map it */}
-              {personData.nameMr.split(' ').map((part, i) => (
-                <React.Fragment key={i}>
-                  {part}
-                  {i < personData.nameMr.split(' ').length - 1 && <br />}
-                </React.Fragment>
-              ))}
+            <h1 className="font-bold font-serif text-dark tracking-tight leading-[1] mb-8 text-[clamp(3.5rem,7vw,7rem)]">
+              {personData.nameMr}
             </h1>
             
-            <p className="text-lg md:text-xl text-light/90 font-sans max-w-lg leading-relaxed border-l border-accent pl-4">
-              {personData.shortBio}
+            <p className="text-[20px] md:text-[24px] text-dark/70 font-sans max-w-lg leading-[1.6] mb-12">
+              धाराशिव आणि कळंबच्या विकासासाठी आणि नागरिकांच्या प्रश्नांसाठी सातत्याने कार्यरत.
             </p>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link 
+                href="/journey" 
+                className="group flex items-center justify-center gap-4 bg-primary text-white px-8 py-4 font-bold tracking-wide hover:bg-accent-hover transition-colors"
+              >
+                <span>माझा प्रवास</span>
+              </Link>
+              
+              <Link 
+                href="/initiatives" 
+                className="group flex items-center justify-center gap-4 bg-white text-dark px-8 py-4 font-bold tracking-wide border border-border hover:border-dark transition-colors"
+              >
+                <span>माझी कामं</span>
+              </Link>
+            </div>
           </motion.div>
 
-          {/* Right Anchored CTAs */}
+          {/* Image Side */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="flex flex-col sm:flex-row md:flex-col gap-4"
+            className="w-full lg:w-1/2 relative aspect-[4/5] md:aspect-square lg:aspect-[3/4] max-h-[800px]"
           >
-            <Link 
-              href="/journey" 
-              className="group flex items-center justify-between gap-6 bg-white text-dark px-6 py-4 border border-white hover:bg-transparent hover:text-white transition-colors duration-300"
-            >
-              <span className="text-sm font-semibold tracking-wide">माझा प्रवास</span>
-              <ArrowDownRight className="w-4 h-4 group-hover:rotate-[-45deg] transition-transform duration-300" />
-            </Link>
-            
-            <Link 
-              href="/initiatives" 
-              className="group flex items-center justify-between gap-6 bg-transparent text-white px-6 py-4 border border-white/20 hover:border-white transition-colors duration-300"
-            >
-              <span className="text-sm font-semibold tracking-wide">कामं पहा</span>
-              <ArrowDownRight className="w-4 h-4 group-hover:rotate-[-45deg] transition-transform duration-300" />
-            </Link>
+            <div className="absolute inset-0 bg-white shadow-2xl p-4 md:p-6 transform rotate-2">
+              <div className="relative w-full h-full overflow-hidden">
+                {heroMedia.status === "available" ? (
+                  <Image 
+                    src={heroMedia.src} 
+                    alt={heroMedia.alt} 
+                    fill 
+                    className="object-cover object-[center_20%]"
+                    priority
+                  />
+                ) : (
+                  <MediaPlaceholder 
+                    category="HERO IMAGE" 
+                    aspectRatio="auto" 
+                    className="h-full w-full border-none"
+                  />
+                )}
+              </div>
+            </div>
           </motion.div>
+
         </div>
       </Container>
     </section>

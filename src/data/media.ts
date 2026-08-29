@@ -6,6 +6,7 @@ export const mediaRegistry: {
   initiatives: Record<string, ImageAsset>;
   journey: Record<string, ImageAsset>;
   people: Record<string, ImageAsset>;
+  assembly: Record<string, ImageAsset>;
   constituency: Record<string, ImageAsset>;
   achievements: Record<string, ImageAsset>;
   awards: Record<string, ImageAsset>;
@@ -15,23 +16,23 @@ export const mediaRegistry: {
 } = {
   hero: {
     main: {
-      src: "/images/hero/hero-main.jpg",
+      src: "/images/real/herosection1.jpg",
       alt: "Kailas Dada Patil",
-      status: "placeholder",
+      status: "available",
     }
   },
   profile: {
     primary: {
-      src: "/images/profile/profile-01.jpg",
+      src: "/images/real/media_1788016497502.jpg",
       alt: "Kailas Dada Patil Portrait",
-      status: "placeholder",
+      status: "available",
     }
   },
   initiatives: {
     farmerInsurance: {
-      src: "/images/initiatives/farmer-insurance-01.jpg",
+      src: "/images/real/media_1788010692928.jpg",
       alt: "Farmer Insurance Initiative",
-      status: "placeholder",
+      status: "available",
     },
     waterSupply: {
       src: "/images/initiatives/water-supply-01.jpg",
@@ -39,16 +40,26 @@ export const mediaRegistry: {
       status: "placeholder",
     },
     medicalCamps: {
-      src: "/images/initiatives/medical-camps-01.jpg",
+      src: "/images/real/media_1788016712195.jpg",
       alt: "Medical Camp",
-      status: "placeholder",
+      status: "available",
     }
   },
   journey: {
     election2024: {
-      src: "/images/journey/election-2024.jpg",
-      alt: "Assembly Election Victory 2024",
-      status: "placeholder",
+      src: "/images/real/media_1788005986170.png",
+      alt: "Felicitation and Recognition",
+      status: "available",
+    },
+    uddhavThackeray: {
+      src: "/images/real/media_1788009718420.png",
+      alt: "Meeting Hon. Uddhav Thackeray",
+      status: "available",
+    },
+    wari: {
+      src: "/images/real/media_1788009761332.png",
+      alt: "Wari with citizens",
+      status: "available",
     },
     election2019: {
       src: "/images/journey/election-2019.jpg",
@@ -73,21 +84,40 @@ export const mediaRegistry: {
   },
   people: {
     interaction1: {
-      src: "/images/people/interaction-01.jpg",
+      src: "/images/real/media_1788005186496.jpg",
       alt: "Public Interaction",
-      status: "placeholder",
+      status: "available",
       caption: "शेतकऱ्यांशी संवाद"
     },
     interaction2: {
-      src: "/images/people/interaction-02.jpg",
-      alt: "Women Empowerment",
-      status: "placeholder",
-      caption: "महिला सक्षमीकरण"
+      src: "/images/real/media_1788005191047.jpg",
+      alt: "Public Gathering",
+      status: "available",
+      caption: "जनतेशी संवाद"
     },
   },
-  constituency: {},
+  assembly: {
+    speaking: {
+      src: "/images/real/media_1788009695425.png",
+      alt: "Speaking in Assembly",
+      status: "available",
+    }
+  },
+  constituency: {
+    flagHoisting: {
+      src: "/images/real/media_1788009748375.png",
+      alt: "Flag Hoisting at Collector Office",
+      status: "available",
+    }
+  },
   achievements: {},
-  awards: {},
+  awards: {
+    felicitation: {
+      src: "/images/real/media_1788010660604.jpg",
+      alt: "Felicitation by Uddhav Thackeray",
+      status: "available",
+    }
+  },
   media: {
     news1: {
       src: "/images/placeholders/news-1.jpg",

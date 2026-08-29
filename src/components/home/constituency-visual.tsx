@@ -2,81 +2,68 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
-import { Button } from "@/components/ui/button";
+import { mediaRegistry } from "@/data/media";
 
 export function ConstituencyVisual() {
+  const bgImage = mediaRegistry.people.interaction2;
+
   return (
-    <section className="py-24 bg-dark relative overflow-hidden">
-      <div className="absolute inset-0 opacity-10 pointer-events-none"
-           style={{
-             backgroundImage: "radial-gradient(circle at 70% 30%, var(--color-accent) 0%, transparent 40%)",
-           }}
-      />
-      
-      <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          
-          {/* Map/Visual Side */}
-          <motion.div
-            initial={{ opacity: 0, rotateY: 10, x: -30 }}
-            whileInView={{ opacity: 1, rotateY: 0, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="relative w-full aspect-square max-w-md mx-auto bg-dark-secondary rounded-full border border-white/10 flex items-center justify-center p-8 shadow-[0_0_100px_rgba(255,119,34,0.1)]"
-          >
-            {/* Abstract visual representation of Dharashiv/Kalamb since actual GIS map is not available */}
-            <div className="relative w-full h-full rounded-full border border-accent/20 flex items-center justify-center">
-              <div className="absolute w-3/4 h-3/4 rounded-full border border-accent/30 animate-[spin_60s_linear_infinite]" />
-              <div className="absolute w-1/2 h-1/2 rounded-full border border-accent/40 animate-[spin_40s_linear_infinite_reverse]" />
-              
-              <div className="absolute top-1/4 left-1/4 flex flex-col items-center">
-                <div className="w-4 h-4 bg-accent rounded-full shadow-[0_0_15px_rgba(255,119,34,1)] mb-2" />
-                <span className="text-white font-semibold text-sm">कळंब</span>
-              </div>
-              
-              <div className="absolute bottom-1/3 right-1/4 flex flex-col items-center">
-                <div className="w-5 h-5 bg-accent rounded-full shadow-[0_0_20px_rgba(255,119,34,1)] mb-2" />
-                <span className="text-white font-semibold text-base">धाराशिव</span>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Content Side */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-col items-start"
-          >
-            <span className="text-accent text-sm font-semibold tracking-wider uppercase mb-3">
-              माझा मतदारसंघ
-            </span>
-            <h2 className="text-4xl lg:text-5xl font-bold font-serif leading-tight mb-6">
-              धाराशिव आणि कळंबचा सर्वांगीण विकास
-            </h2>
-            <p className="text-light/70 text-lg leading-relaxed mb-8">
-              उस्मानाबाद विधानसभा मतदारसंघ (AC-242) हा केवळ एक मतदारसंघ नसून हे माझे कुटुंब आहे. येथील प्रत्येक गावाला, प्रत्येक वाडीला विकासाच्या प्रवाहात आणण्यासाठी आम्ही कटिबद्ध आहोत.
-            </p>
-            
-            <div className="grid grid-cols-2 gap-8 mb-10 w-full">
-              <div className="border-l-2 border-accent/50 pl-4">
-                <div className="text-2xl font-bold text-white mb-1">कळंब</div>
-                <div className="text-sm text-light/60">संपूर्ण तालुका</div>
-              </div>
-              <div className="border-l-2 border-accent/50 pl-4">
-                <div className="text-2xl font-bold text-white mb-1">धाराशिव</div>
-                <div className="text-sm text-light/60">तालुक्याचा भाग</div>
-              </div>
-            </div>
-
-            <Button asChild size="lg">
-              <Link href="/constituency">मतदारसंघातील कामे पहा &rarr;</Link>
-            </Button>
-          </motion.div>
+    <section className="py-24 relative overflow-hidden text-white border-b border-dark">
+      {/* Background Image with Dark Overlay */}
+      {bgImage.status === "available" && (
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src={bgImage.src} 
+            alt="Background"
+            fill
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-dark/75"></div>
         </div>
+      )}
+      
+      <Container className="relative z-10">
+          <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="flex flex-col items-center"
+            >
+              <span className="text-primary text-[14px] md:text-[16px] font-semibold tracking-[0.2em] uppercase mb-6 block">
+                माझा मतदारसंघ
+              </span>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-serif leading-[1.2] mb-10 text-white">
+                धाराशिव आणि कळंबचा<br />सर्वांगीण विकास
+              </h2>
+              <p className="text-[18px] md:text-[22px] text-white/80 leading-[1.8] mb-16 max-w-3xl font-sans">
+                उस्मानाबाद विधानसभा मतदारसंघ (AC-242) हा केवळ एक मतदारसंघ नसून हे माझे कुटुंब आहे. येथील प्रत्येक गावाला, प्रत्येक वाडीला विकासाच्या प्रवाहात आणण्यासाठी आम्ही कटिबद्ध आहोत.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-12 sm:gap-24 mb-16 border-y border-white/20 py-12 w-full justify-center bg-dark/40 backdrop-blur-sm shadow-sm">
+                <div>
+                  <div className="text-[clamp(2.5rem,4vw,4rem)] font-bold text-white mb-2 font-serif leading-none">कळंब</div>
+                  <div className="text-[14px] md:text-[16px] text-white/50 uppercase tracking-widest font-bold">संपूर्ण तालुका</div>
+                </div>
+                <div className="hidden sm:block w-px bg-white/20"></div>
+                <div>
+                  <div className="text-[clamp(2.5rem,4vw,4rem)] font-bold text-white mb-2 font-serif leading-none">धाराशिव</div>
+                  <div className="text-[14px] md:text-[16px] text-white/50 uppercase tracking-widest font-bold">तालुक्याचा भाग</div>
+                </div>
+              </div>
+
+              <Link 
+                href="/constituency"
+                className="group inline-flex items-center text-[15px] tracking-widest font-sans uppercase text-primary font-bold hover:text-white transition-colors"
+              >
+                मतदारसंघातील कामे पहा <span className="ml-2 group-hover:translate-x-2 transition-transform">&rarr;</span>
+              </Link>
+            </motion.div>
+          </div>
       </Container>
     </section>
   );

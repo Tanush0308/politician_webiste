@@ -44,27 +44,24 @@ export function Header() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-colors duration-300",
-          isScrolled ? "bg-dark/95 backdrop-blur-md shadow-lg py-3" : "bg-transparent py-5"
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          isScrolled ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-border py-3" : "bg-white border-b border-border py-4"
         )}
       >
         <Container className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:scale-105 transition-transform">
-              कै
-            </div>
             <div className="flex flex-col leading-tight">
-              <span className="text-xl font-bold font-serif text-white group-hover:text-accent transition-colors">
+              <span className="text-xl md:text-2xl font-bold font-serif text-dark group-hover:text-primary transition-colors">
                 {siteConfig.siteName}
               </span>
-              <span className="text-[11px] text-light/70 uppercase tracking-widest">
-                {siteConfig.designationEn}
+              <span className="text-[12px] text-dark/70 font-sans font-medium uppercase tracking-widest mt-0.5">
+                {siteConfig.designationMr}
               </span>
             </div>
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-2">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
@@ -72,15 +69,15 @@ export function Header() {
                   key={link.name}
                   href={link.href}
                   className={cn(
-                    "px-4 py-2 rounded-full text-sm font-medium transition-all relative group",
-                    isActive ? "text-white" : "text-light/80 hover:text-white"
+                    "px-4 py-2 rounded-full text-[15px] font-sans font-bold transition-all relative group",
+                    isActive ? "text-primary" : "text-dark/70 hover:text-dark"
                   )}
                 >
                   {link.name}
                   {isActive && (
                     <motion.div
                       layoutId="activeNav"
-                      className="absolute inset-0 bg-white/10 rounded-full -z-10"
+                      className="absolute inset-x-0 bottom-0 h-0.5 bg-primary -z-10"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -88,15 +85,18 @@ export function Header() {
               );
             })}
             <div className="ml-4">
-              <Button asChild size="sm">
-                <Link href="/contact">संपर्क</Link>
-              </Button>
+              <Link 
+                href="/contact"
+                className="bg-primary text-white px-6 py-2.5 rounded text-[15px] font-bold font-sans hover:bg-accent-hover transition-colors"
+              >
+                संपर्क
+              </Link>
             </div>
           </nav>
 
           {/* Mobile Toggle */}
           <button
-            className="lg:hidden text-light p-2 focus:outline-none"
+            className="lg:hidden text-dark p-2 focus:outline-none"
             onClick={() => setMobileMenuOpen(true)}
             aria-label="Open menu"
           >
@@ -119,13 +119,13 @@ export function Header() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="absolute right-0 top-0 bottom-0 w-[85%] max-w-sm bg-dark-secondary shadow-2xl flex flex-col"
+              className="absolute right-0 top-0 bottom-0 w-[85%] max-w-sm bg-white shadow-2xl flex flex-col"
             >
-              <div className="p-5 flex items-center justify-between border-b border-white/10">
-                <span className="font-bold font-serif text-xl">मेनू</span>
+              <div className="p-5 flex items-center justify-between border-b border-border">
+                <span className="font-bold font-serif text-xl text-dark">मेनू</span>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 bg-white/5 rounded-full hover:bg-white/10 transition-colors"
+                  className="p-2 bg-off-white text-dark rounded-full hover:bg-border transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -138,10 +138,10 @@ export function Header() {
                       key={link.name}
                       href={link.href}
                       className={cn(
-                        "px-4 py-3 rounded-lg text-base font-medium transition-colors",
+                        "px-4 py-3 rounded-lg text-base font-bold font-sans transition-colors",
                         isActive
-                          ? "bg-accent/10 text-accent"
-                          : "text-light/80 hover:bg-white/5 hover:text-white"
+                          ? "bg-off-white text-primary"
+                          : "text-dark/80 hover:bg-off-white hover:text-dark"
                       )}
                     >
                       {link.name}
@@ -149,10 +149,13 @@ export function Header() {
                   );
                 })}
               </nav>
-              <div className="p-5 border-t border-white/10">
-                <Button asChild className="w-full">
-                  <Link href="/contact">संपर्क साधा</Link>
-                </Button>
+              <div className="p-5 border-t border-border">
+                <Link 
+                  href="/contact"
+                  className="w-full flex justify-center bg-primary text-white px-6 py-3 rounded text-[15px] font-bold font-sans hover:bg-accent-hover transition-colors"
+                >
+                  संपर्क साधा
+                </Link>
               </div>
             </motion.div>
           </motion.div>

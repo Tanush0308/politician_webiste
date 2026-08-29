@@ -21,8 +21,7 @@ export const siteConfig = {
   },
   social: {
     instagram: "https://www.instagram.com/kailas_dada_patil_fc/",
-    facebook: "#",
-    twitter: "#",
-    youtube: "#",
+    facebook: "https://www.facebook.com/kailasghadgepatil/",
+    twitter: "https://x.com/PatilKailasB?lang=en",
   }
 };

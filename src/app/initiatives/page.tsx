@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { MediaPlaceholder } from "@/components/ui/media-placeholder";
+import { mediaRegistry } from "@/data/media";
 
 export const metadata = {
   title: "विकासकामे | Kailas Dada Patil",
@@ -15,60 +16,70 @@ export default function InitiativesPage() {
   const initiatives = getInitiatives();
 
   return (
-    <div className="pt-32 pb-24 min-h-screen bg-dark">
-      <Container>
-        <SectionTitle 
-          title="विकासकामे"
-          eyebrow="एक काम. एक कथा."
-          subtitle="मतदारसंघाच्या सर्वांगीण विकासासाठी आणि जनतेचे जीवनमान उंचावण्यासाठी राबवलेले मुख्य उपक्रम."
-          className="mb-16"
-        />
+    <div className="min-h-screen bg-off-white">
+      <div className="relative pt-32 pb-24 border-b border-border overflow-hidden bg-off-white">
+        {mediaRegistry.assembly.speaking.status === "available" && (
+          <div className="absolute inset-0 z-0 pointer-events-none mix-blend-multiply">
+            <Image 
+              src={mediaRegistry.assembly.speaking.src} 
+              alt="Assembly Background"
+              fill
+              className="object-cover object-center opacity-25"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-off-white via-transparent to-transparent"></div>
+          </div>
+        )}
+        <Container className="relative z-10">
+          <SectionTitle 
+            title="विकासकामे"
+            eyebrow="एक काम. एक कथा."
+            subtitle="मतदारसंघाच्या सर्वांगीण विकासासाठी आणि जनतेचे जीवनमान उंचावण्यासाठी राबवलेले मुख्य उपक्रम."
+            className="mb-16 text-dark"
+          />
+        </Container>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {initiatives.map((initiative) => (
-            <div 
+      <Container className="py-24">
+
+        <div className="flex flex-col border-t border-border">
+          {initiatives.map((initiative, index) => (
+            <Link 
+              href={`/initiatives/${initiative.slug}`}
               key={initiative.slug} 
-              className="bg-dark-secondary rounded-2xl overflow-hidden border border-white/5 hover:border-accent/30 transition-all hover:-translate-y-2 flex flex-col"
+              className="group flex flex-col lg:flex-row lg:items-center justify-between border-b border-border py-10 hover:bg-white transition-colors px-4 -mx-4 rounded-lg"
             >
-              <div className="w-full aspect-video relative overflow-hidden bg-dark/20">
-                {initiative.heroImage?.status === "available" ? (
-                  <Image
-                    src={initiative.heroImage.src}
-                    alt={initiative.heroImage.alt}
-                    fill
-                    className="object-cover object-center"
-                  />
-                ) : (
-                  <MediaPlaceholder category={initiative.category.toUpperCase()} aspectRatio="auto" className="border-none" />
-                )}
-              </div>
-              <div className="p-6 flex flex-col flex-1">
-                <span className="text-accent text-xs font-bold tracking-wider uppercase mb-2">
+              <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-16 w-full lg:w-3/4">
+                <span className="text-[14px] font-sans font-bold tracking-[0.2em] text-muted w-12 shrink-0">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                
+                <span className="text-[14px] uppercase tracking-widest text-primary font-bold w-32 shrink-0">
                   {initiative.category}
                 </span>
-                <h3 className="text-xl font-bold font-serif mb-3 text-white">
-                  {initiative.title}
-                </h3>
-                <p className="text-light/70 text-sm mb-6 flex-1">
-                  {initiative.shortDescription}
-                </p>
-                
+
+                <div className="flex flex-col gap-2">
+                  <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold font-serif text-dark group-hover:text-primary transition-colors">
+                    {initiative.title}
+                  </h3>
+                  <p className="text-[17px] text-dark/70 font-sans mt-2 max-w-2xl hidden md:block group-hover:text-dark transition-colors">
+                    {initiative.shortDescription}
+                  </p>
+                </div>
+              </div>
+              
+              <div className="mt-8 lg:mt-0 flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12 w-full lg:w-1/4 justify-end">
                 {initiative.stats && initiative.stats.length > 0 && (
-                  <div className="grid grid-cols-2 gap-4 mb-6 pt-4 border-t border-white/5">
-                    {initiative.stats.map((stat, i) => (
-                      <div key={i}>
-                        <div className="font-bold text-accent">{stat.value}</div>
-                        <div className="text-[10px] text-light/50 uppercase">{stat.label}</div>
-                      </div>
-                    ))}
+                  <div className="flex flex-col items-start lg:items-end">
+                    <span className="text-2xl font-bold font-serif text-dark">{initiative.stats[0].value}</span>
                   </div>
                 )}
-
-                <Button asChild variant="outline" className="w-full border-white/10">
-                  <Link href={`/initiatives/${initiative.slug}`}>सविस्तर वाचा</Link>
-                </Button>
+                
+                <span className="text-muted group-hover:text-primary font-bold transition-colors flex items-center">
+                  <span className="text-[14px] uppercase tracking-widest mr-4">सविस्तर वाचा</span>
+                  <span className="text-[20px] group-hover:translate-x-2 inline-block transition-transform duration-300">&rarr;</span>
+                </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </Container>

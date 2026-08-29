@@ -10,6 +10,13 @@ export const journeyEvents: JourneyEvent[] = [
     verification: "verified"
   },
   {
+    year: "२०२२",
+    title: "निष्ठेची साथ",
+    description: "शिवसेना पक्षप्रमुख मा. उद्धवसाहेब ठाकरे यांच्या पाठीशी ठामपणे उभे राहत निष्ठेचे दर्शन घडवले.",
+    image: mediaRegistry.journey.uddhavThackeray,
+    verification: "verified"
+  },
+  {
     year: "२०१९",
     title: "पहिल्यांदा विधानसभेत",
     description: "धाराशिव-कळंब मतदारसंघातील जनतेने दाखवलेल्या विश्वासामुळे पहिल्यांदाच विधानसभेत प्रवेश.",

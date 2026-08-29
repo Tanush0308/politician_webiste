@@ -4,20 +4,23 @@ import { mediaRegistry } from "./media";
 export const galleryData: GalleryItem[] = [
   {
     id: "gallery-1",
-    image: mediaRegistry.gallery.placeholder1,
+    image: mediaRegistry.awards.felicitation,
     category: "events",
+    title: "उद्धव साहेब ठाकरे यांच्यासोबत",
     verification: "verified"
   },
   {
     id: "gallery-2",
     image: mediaRegistry.gallery.placeholder2,
-    category: "people",
-    verification: "verified"
+    category: "campaigns",
+    title: "जनतेशी संवाद",
+    verification: "unverified"
   },
   {
     id: "gallery-3",
     image: mediaRegistry.gallery.placeholder3,
-    category: "assembly",
-    verification: "verified"
+    category: "events",
+    title: "सांस्कृतिक कार्यक्रम",
+    verification: "unverified"
   }
 ];

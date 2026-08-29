@@ -10,21 +10,21 @@ function StatItem({ metric }: { metric: ImpactMetric }) {
   const isVerified = metric.verification === "verified";
 
   return (
-    <div className="p-6 md:p-10 flex flex-col justify-between aspect-square md:aspect-[4/3] group hover:bg-white/[0.02] transition-colors relative">
-      <div className="text-[10px] uppercase tracking-[0.2em] text-light/50 font-sans mb-8">
+    <div className="p-8 md:p-12 flex flex-col justify-between aspect-square md:aspect-auto md:h-full group hover:bg-white/50 transition-colors relative border-b border-border md:border-b-0">
+      <div className="text-[14px] uppercase tracking-[0.2em] text-muted font-sans font-bold mb-8">
         {metric.label}
       </div>
       <div>
         {isVerified ? (
-          <div className="text-5xl md:text-6xl lg:text-7xl font-bold font-serif text-white tracking-tighter">
+          <div className="text-[clamp(3.5rem,5vw,6rem)] font-bold font-serif text-dark tracking-tighter leading-none mb-4 text-primary">
             {metric.value}
           </div>
         ) : (
-          <div className="text-sm md:text-base font-bold font-sans text-white/50 tracking-widest uppercase border border-white/10 p-2 inline-block">
+          <div className="text-[14px] md:text-base font-bold font-sans text-muted tracking-widest uppercase border border-border p-2 inline-block mb-4">
             DATA PENDING
           </div>
         )}
-        <div className="mt-4 text-xs text-light/70 font-sans leading-relaxed max-w-[80%]">
+        <div className="text-[18px] text-dark/80 font-sans leading-relaxed max-w-[90%]">
           {metric.description}
         </div>
       </div>
@@ -33,11 +33,13 @@ function StatItem({ metric }: { metric: ImpactMetric }) {
 }
 
 export function ImpactNumbers() {
+  const displayMetrics = impactMetrics.slice(0, 4);
+  
   return (
-    <section className="bg-dark border-t border-white/10">
+    <section className="bg-off-white border-y border-border">
       <Container className="px-0 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-3 border-x border-white/10 divide-x divide-y md:divide-y-0 divide-white/10">
-          {impactMetrics.map((metric, idx) => (
+        <div className={`grid grid-cols-2 md:grid-cols-${Math.min(displayMetrics.length, 4)} divide-x divide-y md:divide-y-0 divide-border`}>
+          {displayMetrics.map((metric, idx) => (
             <motion.div
               key={metric.label}
               initial={{ opacity: 0 }}
