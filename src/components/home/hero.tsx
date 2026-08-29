@@ -2,29 +2,27 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { personData } from "@/data/person";
 import { motion } from "framer-motion";
 
 export function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-24 pb-16 overflow-hidden">
+    <section className="relative min-h-[90vh] flex items-center pt-24 pb-16 overflow-hidden bg-off-white">
       
-      {/* Background Video Layer */}
+      {/* Background Image Layer */}
       <div className="absolute inset-0 z-0">
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-          className="object-cover w-full h-full"
-        >
-          <source src="/videos/hero_video.mp4" type="video/mp4" />
-        </video>
-        {/* Beige/Warm White Overlay for text readability but keeping video visible */}
-        <div className="absolute inset-0 bg-[#FAF9F6]/60 mix-blend-normal"></div>
-        {/* Subtle gradient to anchor text */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#FAF9F6]/90 via-[#FAF9F6]/50 to-transparent"></div>
+        <Image 
+          src="/images/hero/hero_new.jpg"
+          alt="Kailas Dada Patil"
+          fill
+          priority
+          className="object-cover object-top opacity-90"
+        />
+        {/* Warm White Overlay for text readability on the left, fading out on the right so the image is visible */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#FAF9F6] via-[#FAF9F6]/90 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#FAF9F6]/20 via-transparent to-[#FAF9F6]/40"></div>
       </div>
 
       <Container className="relative z-10 w-full h-full">
