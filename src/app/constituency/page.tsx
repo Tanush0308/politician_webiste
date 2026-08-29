@@ -1,9 +1,9 @@
 import { Container } from "@/components/ui/container";
 import { SectionTitle } from "@/components/typography/section-title";
 import { Metadata } from "next";
-import { MapPin, Users, Building, Activity } from "lucide-react";
 import { mediaRegistry } from "@/data/media";
 import Image from "next/image";
+import { constituencyData } from "@/data/constituency";
 
 export const metadata: Metadata = {
   title: "मतदारसंघ | Constituency | Kailas Dada Patil",
@@ -22,7 +22,6 @@ export default function ConstituencyPage() {
               fill
               className="object-cover object-[center_30%]"
             />
-            {/* Professional dark overlay: keeps image visible and vibrant while ensuring white text readability */}
             <div className="absolute inset-0 z-0 bg-dark/50"></div>
           </div>
         )}
@@ -31,7 +30,7 @@ export default function ConstituencyPage() {
             <SectionTitle 
               title="माझा मतदारसंघ"
               eyebrow="उस्मानाबाद - कळंब"
-              subtitle="ऐतिहासिक आणि सांस्कृतिक वारसा लाभलेला माझा मतदारसंघ. येथील जनतेच्या सर्वांगीण विकासासाठी आम्ही कटिबद्ध आहोत."
+              subtitle={constituencyData.description}
               className="mb-16 text-white"
             />
           </div>
@@ -39,75 +38,49 @@ export default function ConstituencyPage() {
       </div>
 
       <Container className="py-24">
-
         <div className="flex flex-col mb-24">
           <div className="border-t-2 border-dark pt-8 pb-16 flex flex-col md:flex-row md:items-start gap-8 md:gap-24">
             <div className="md:w-1/3">
               <span className="text-[12px] md:text-[14px] text-primary tracking-[0.2em] font-bold uppercase block mb-4">विधानसभा</span>
-              <h3 className="text-6xl md:text-8xl font-bold font-serif text-dark">२४२</h3>
+              <h3 className="text-6xl md:text-8xl font-bold font-serif text-dark">{constituencyData.assemblyNumber}</h3>
             </div>
             <div className="md:w-2/3">
               <p className="text-[18px] md:text-[22px] text-dark/80 leading-[1.8] font-sans max-w-3xl">
-                महाराष्ट्राच्या नकाशावरील एक महत्त्वाचा आणि ऐतिहासिक वारसा असलेला उस्मानाबाद विधानसभा मतदारसंघ. येथील प्रत्येक गावाला विकासाच्या प्रवाहात आणण्यासाठी आम्ही कटिबद्ध आहोत.
+                {constituencyData.description}
               </p>
             </div>
           </div>
 
           <div className="flex flex-col border-t-2 border-dark">
-            {/* ROW 1 */}
-            <div className="flex flex-col md:flex-row md:items-start py-10 border-b border-border group hover:bg-white transition-colors gap-6 md:gap-24 px-4 -mx-4 rounded">
-              <div className="md:w-1/3 flex items-center gap-6">
-                <span className="text-[12px] font-sans font-bold tracking-[0.2em] text-muted w-8 shrink-0">01</span>
-                <h4 className="text-2xl md:text-3xl font-serif font-bold text-dark">भौगोलिक विस्तार</h4>
+            {constituencyData.stats.map((stat, index) => (
+              <div key={stat.id} className="flex flex-col md:flex-row md:items-start py-10 border-b border-border group hover:bg-white transition-colors gap-6 md:gap-24 px-4 -mx-4 rounded">
+                <div className="md:w-1/3 flex flex-col gap-2">
+                  <div className="flex items-center gap-6">
+                    <span className="text-[12px] font-sans font-bold tracking-[0.2em] text-muted w-8 shrink-0">
+                      {(index + 1).toString().padStart(2, '0')}
+                    </span>
+                    <h4 className="text-2xl md:text-3xl font-serif font-bold text-dark">{stat.label}</h4>
+                  </div>
+                  {stat.sources && stat.sources.length > 0 && (
+                    <div className="ml-14 mt-2">
+                      <span className="text-xs text-muted-foreground">स्रोत: {stat.sources[0].label}</span>
+                    </div>
+                  )}
+                </div>
+                <div className="md:w-2/3">
+                  <p className="text-[18px] md:text-[20px] text-dark/70 font-sans leading-relaxed group-hover:text-dark transition-colors mb-2">
+                    {stat.value}
+                  </p>
+                  {stat.description && (
+                    <p className="text-sm text-dark/50">
+                      {stat.description}
+                    </p>
+                  )}
+                </div>
               </div>
-              <div className="md:w-2/3">
-                <p className="text-[18px] md:text-[20px] text-dark/70 font-sans leading-relaxed group-hover:text-dark transition-colors">
-                  संपूर्ण कळंब तालुका आणि उस्मानाबाद तालुक्याचा काही भाग.
-                </p>
-              </div>
-            </div>
-
-            {/* ROW 2 */}
-            <div className="flex flex-col md:flex-row md:items-start py-10 border-b border-border group hover:bg-white transition-colors gap-6 md:gap-24 px-4 -mx-4 rounded">
-              <div className="md:w-1/3 flex items-center gap-6">
-                <span className="text-[12px] font-sans font-bold tracking-[0.2em] text-muted w-8 shrink-0">02</span>
-                <h4 className="text-2xl md:text-3xl font-serif font-bold text-dark">एकूण मतदार</h4>
-              </div>
-              <div className="md:w-2/3">
-                <p className="text-[18px] md:text-[20px] text-dark/70 font-sans leading-relaxed group-hover:text-dark transition-colors">
-                  सुमारे ३ लाख ६० हजार मतदार.
-                </p>
-              </div>
-            </div>
-
-            {/* ROW 3 */}
-            <div className="flex flex-col md:flex-row md:items-start py-10 border-b border-border group hover:bg-white transition-colors gap-6 md:gap-24 px-4 -mx-4 rounded">
-              <div className="md:w-1/3 flex items-center gap-6">
-                <span className="text-[12px] font-sans font-bold tracking-[0.2em] text-muted w-8 shrink-0">03</span>
-                <h4 className="text-2xl md:text-3xl font-serif font-bold text-dark">ग्रामपंचायती व गावे</h4>
-              </div>
-              <div className="md:w-2/3">
-                <p className="text-[18px] md:text-[20px] text-dark/70 font-sans leading-relaxed group-hover:text-dark transition-colors">
-                  १५० पेक्षा अधिक गावे आणि वाड्या-वस्त्या.
-                </p>
-              </div>
-            </div>
-
-            {/* ROW 4 */}
-            <div className="flex flex-col md:flex-row md:items-start py-10 border-b border-border group hover:bg-white transition-colors gap-6 md:gap-24 px-4 -mx-4 rounded">
-              <div className="md:w-1/3 flex items-center gap-6">
-                <span className="text-[12px] font-sans font-bold tracking-[0.2em] text-muted w-8 shrink-0">04</span>
-                <h4 className="text-2xl md:text-3xl font-serif font-bold text-dark">प्रमुख व्यवसाय</h4>
-              </div>
-              <div className="md:w-2/3">
-                <p className="text-[18px] md:text-[20px] text-dark/70 font-sans leading-relaxed group-hover:text-dark transition-colors">
-                  शेती हा प्रमुख व्यवसाय असून सोयाबीन, ऊस, हरभरा आणि ज्वारी ही मुख्य पिके आहेत.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
-
       </Container>
     </div>
   );

@@ -32,6 +32,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+const statusMap: Record<string, string> = {
+  "Demand": "मागणी केली",
+  "Follow-up": "पाठपुरावा सुरू",
+  "Question Raised": "प्रश्न उपस्थित केला",
+  "Representation Submitted": "निवेदन दिले",
+  "Approved": "मंजुरी मिळाली",
+  "In Progress": "काम प्रगतीपथावर आहे",
+  "Partially Implemented": "अंशतः अंमलबजावणी",
+  "Completed": "काम पूर्ण झाले",
+  "Status Unclear": "सद्यस्थिती अस्पष्ट"
+};
+
 export default async function InitiativeDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const initiative = getInitiativeBySlug(slug);
@@ -39,6 +51,8 @@ export default async function InitiativeDetailPage({ params }: PageProps) {
   if (!initiative) {
     notFound();
   }
+
+  const translatedStatus = initiative.status ? (statusMap[initiative.status] || initiative.status) : null;
 
   return (
     <div className="bg-dark min-h-screen">
@@ -73,8 +87,8 @@ export default async function InitiativeDetailPage({ params }: PageProps) {
 
           <div className="px-4 space-y-8">
             <div className="flex flex-col gap-2 text-xs text-light/60 uppercase tracking-widest border-l border-accent pl-4">
-              <span>{initiative.date}</span>
-              <span>{initiative.location}</span>
+              {initiative.date && <span>{initiative.date}</span>}
+              {initiative.location && <span>{initiative.location}</span>}
             </div>
 
             {initiative.stats && initiative.stats.length > 0 && (
@@ -91,27 +105,60 @@ export default async function InitiativeDetailPage({ params }: PageProps) {
             <div className="space-y-6 text-lg text-light/80 leading-relaxed font-sans">
               {initiative.problem && (
                 <div>
-                  <h3 className="text-xl font-serif text-white mb-2">समस्या</h3>
+                  <h3 className="text-xl font-serif text-white mb-2">समस्या / पार्श्वभूमी</h3>
                   <p>{initiative.problem}</p>
                 </div>
               )}
               {initiative.action && (
                 <div>
-                  <h3 className="text-xl font-serif text-white mb-2">उपाययोजना</h3>
+                  <h3 className="text-xl font-serif text-white mb-2">उपाययोजना / मागणी</h3>
                   <p>{initiative.action}</p>
+                </div>
+              )}
+              {initiative.governmentResponse && (
+                <div>
+                  <h3 className="text-xl font-serif text-white mb-2">शासनाचे उत्तर / प्रतिसाद</h3>
+                  <p>{initiative.governmentResponse}</p>
                 </div>
               )}
               {initiative.result && (
                 <div>
-                  <h3 className="text-xl font-serif text-white mb-2">परिणाम</h3>
+                  <h3 className="text-xl font-serif text-white mb-2">परिणाम / सद्यस्थिती</h3>
                   <p>{initiative.result}</p>
                 </div>
               )}
               
-              <div className="mt-12 pt-8 border-t border-white/10">
-                <span className="text-[10px] uppercase tracking-[0.2em] text-light/50 block mb-4">सद्यस्थिती</span>
-                <p className="text-white font-medium">प्रकल्प पूर्ण. नागरिकांना सेवा उपलब्ध.</p>
-              </div>
+              {translatedStatus && (
+                <div className="mt-12 pt-8 border-t border-white/10">
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-light/50 block mb-4">अधिकृत सद्यस्थिती</span>
+                  <div className="inline-block px-4 py-2 bg-white/5 border border-white/10 rounded-full">
+                    <p className="text-white font-bold text-sm tracking-wide">{translatedStatus}</p>
+                  </div>
+                </div>
+              )}
+
+              {initiative.sources && initiative.sources.length > 0 && (
+                <div className="mt-12 pt-8 border-t border-white/10">
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-light/50 block mb-4">स्रोत / Sources</span>
+                  <ul className="space-y-3">
+                    {initiative.sources.map((src, i) => (
+                      <li key={i}>
+                        {src.url ? (
+                          <a href={src.url} target="_blank" rel="noopener noreferrer" className="text-sm text-accent hover:underline flex items-center gap-2">
+                            {src.label} 
+                            <span className="text-[10px] bg-white/10 px-2 py-0.5 rounded text-light/70 uppercase tracking-widest">{src.type}</span>
+                          </a>
+                        ) : (
+                          <span className="text-sm text-light/80 flex items-center gap-2">
+                            {src.label}
+                            <span className="text-[10px] bg-white/10 px-2 py-0.5 rounded text-light/70 uppercase tracking-widest">{src.type}</span>
+                          </span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -133,9 +180,9 @@ export default async function InitiativeDetailPage({ params }: PageProps) {
                   {initiative.title}
                 </h1>
                 <div className="flex items-center gap-6 text-xs text-light/50 uppercase tracking-widest">
-                  <span>{initiative.date}</span>
-                  <span>•</span>
-                  <span>{initiative.location}</span>
+                  {initiative.date && <span>{initiative.date}</span>}
+                  {initiative.date && initiative.location && <span>•</span>}
+                  {initiative.location && <span>{initiative.location}</span>}
                 </div>
               </div>
 
@@ -171,28 +218,61 @@ export default async function InitiativeDetailPage({ params }: PageProps) {
             <article className="prose prose-invert prose-lg max-w-none prose-p:text-light/80 prose-p:leading-relaxed prose-headings:font-serif prose-headings:text-white">
               {initiative.problem && (
                 <>
-                  <h3 className="text-xl font-serif mb-6 text-white border-l-2 border-accent pl-4">समस्या</h3>
+                  <h3 className="text-xl font-serif mb-6 text-white border-l-2 border-accent pl-4">समस्या / पार्श्वभूमी</h3>
                   <p className="mb-6">{initiative.problem}</p>
                 </>
               )}
               {initiative.action && (
                 <>
-                  <h3 className="text-xl font-serif mt-12 mb-6 text-white border-l-2 border-accent pl-4">उपाययोजना</h3>
+                  <h3 className="text-xl font-serif mt-12 mb-6 text-white border-l-2 border-accent pl-4">उपाययोजना / मागणी</h3>
                   <p className="mb-6">{initiative.action}</p>
+                </>
+              )}
+              {initiative.governmentResponse && (
+                <>
+                  <h3 className="text-xl font-serif mt-12 mb-6 text-white border-l-2 border-accent pl-4">शासनाचे उत्तर / प्रतिसाद</h3>
+                  <p className="mb-6">{initiative.governmentResponse}</p>
                 </>
               )}
               {initiative.result && (
                 <>
-                  <h3 className="text-xl font-serif mt-12 mb-6 text-white border-l-2 border-accent pl-4">परिणाम</h3>
+                  <h3 className="text-xl font-serif mt-12 mb-6 text-white border-l-2 border-accent pl-4">परिणाम / सद्यस्थिती</h3>
                   <p className="mb-6">{initiative.result}</p>
                 </>
               )}
             </article>
             
-            <div className="mt-20 pt-10 border-t border-white/10">
-              <span className="text-[10px] uppercase tracking-[0.2em] text-light/40 block mb-2">Sources / अधिकृत माहिती</span>
-              <p className="text-sm text-light/60">आमदार स्थानिक विकास निधी अहवाल आणि शासकीय परिपत्रके.</p>
-            </div>
+            {translatedStatus && (
+              <div className="mt-20 pt-10 border-t border-white/10">
+                <span className="text-[10px] uppercase tracking-[0.2em] text-light/40 block mb-4">अधिकृत सद्यस्थिती</span>
+                <div className="inline-block px-6 py-3 bg-white/5 border border-white/10 rounded-full">
+                  <p className="text-white font-bold tracking-wide">{translatedStatus}</p>
+                </div>
+              </div>
+            )}
+
+            {initiative.sources && initiative.sources.length > 0 && (
+              <div className="mt-12 pt-10 border-t border-white/10">
+                <span className="text-[10px] uppercase tracking-[0.2em] text-light/40 block mb-4">स्रोत / Sources</span>
+                <ul className="space-y-4">
+                  {initiative.sources.map((src, i) => (
+                    <li key={i}>
+                      {src.url ? (
+                        <a href={src.url} target="_blank" rel="noopener noreferrer" className="text-light/80 hover:text-accent transition-colors flex items-center gap-3">
+                          {src.label} 
+                          <span className="text-[10px] bg-white/10 px-2 py-0.5 rounded-sm text-light/60 uppercase tracking-widest">{src.type}</span>
+                        </a>
+                      ) : (
+                        <span className="text-light/80 flex items-center gap-3">
+                          {src.label}
+                          <span className="text-[10px] bg-white/10 px-2 py-0.5 rounded-sm text-light/60 uppercase tracking-widest">{src.type}</span>
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
 

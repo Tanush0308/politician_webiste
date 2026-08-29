@@ -41,6 +41,17 @@ export interface VideoAsset {
   verification?: VerificationStatus;
 }
 
+export type InitiativeStatus =
+  | "Demand"
+  | "Follow-up"
+  | "Question Raised"
+  | "Representation Submitted"
+  | "Approved"
+  | "In Progress"
+  | "Partially Implemented"
+  | "Completed"
+  | "Status Unclear";
+
 export interface Initiative {
   slug: string;
   title: string;
@@ -49,12 +60,13 @@ export interface Initiative {
   category: string;
   location?: string;
   date?: string;
-  status?: string;
+  status?: InitiativeStatus;
   heroImage?: ImageAsset;
   gallery?: ImageAsset[];
   videos?: VideoAsset[];
   problem?: string;
   action?: string;
+  governmentResponse?: string;
   result?: string;
   stats?: { value: string; label: string }[];
   sources?: ContentSource[];
