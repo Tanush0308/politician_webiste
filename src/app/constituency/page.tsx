@@ -15,15 +15,18 @@ export default function ConstituencyPage() {
     <div className="min-h-screen bg-off-white">
       <div className="relative pt-32 pb-24 border-b border-border overflow-hidden bg-off-white">
         {mediaRegistry.constituency.flagHoisting.status === "available" && (
-          <div className="absolute inset-0 z-0 pointer-events-none mix-blend-multiply">
-            <Image 
-              src={mediaRegistry.constituency.flagHoisting.src} 
-              alt="Constituency Background"
-              fill
-              className="object-cover object-center opacity-25"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-off-white via-transparent to-transparent"></div>
-          </div>
+          <>
+            <div className="absolute inset-0 z-0 pointer-events-none">
+              <Image 
+                src={mediaRegistry.constituency.flagHoisting.src} 
+                alt="Constituency Background"
+                fill
+                className="object-cover object-[center_30%]"
+              />
+            </div>
+            <div className="absolute inset-0 z-0 bg-off-white/75"></div>
+            <div className="absolute inset-0 z-0 bg-gradient-to-t from-off-white to-transparent"></div>
+          </>
         )}
         <Container className="relative z-10">
           <SectionTitle 
