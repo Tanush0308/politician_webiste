@@ -66,12 +66,12 @@ export function FeaturedInitiatives() {
                     src={initiative.heroImage.src} 
                     alt={initiative.heroImage.alt || initiative.title} 
                     fill 
-                    className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 ) : (
                   <MediaPlaceholder category="INITIATIVE" aspectRatio="video" />
                 )}
-                <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors duration-500"></div>
+                <div className="absolute inset-0 bg-black/20"></div>
                 <div className="absolute top-4 right-4 bg-primary text-white text-xs font-bold px-3 py-1">
                   {initiative.category}
                 </div>

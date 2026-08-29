@@ -35,9 +35,9 @@ export const mediaRegistry: {
       status: "available",
     },
     waterSupply: {
-      src: "/images/initiatives/water-supply-01.jpg",
+      src: "/images/real/media_1788023167341.jpg",
       alt: "Water Supply Project",
-      status: "placeholder",
+      status: "available",
     },
     medicalCamps: {
       src: "/images/real/media_1788016712195.jpg",

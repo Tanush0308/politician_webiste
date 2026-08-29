@@ -1,53 +1,61 @@
 import { Container } from "@/components/ui/container";
 import { SectionTitle } from "@/components/typography/section-title";
 import { Metadata } from "next";
+import Image from "next/image";
+import { galleryData } from "@/data/gallery";
 
 export const metadata: Metadata = {
   title: "गॅलरी | Photo & Video Gallery | Kailas Dada Patil",
   description: "फोटो गॅलरी, व्हिडिओज आणि विविध कार्यक्रमांची क्षणचित्रे.",
 };
 
-const photos = [
-  { src: "/images/placeholders/gallery-1.jpg", alt: "Photo 1" },
-  { src: "/images/placeholders/gallery-2.jpg", alt: "Photo 2" },
-  { src: "/images/placeholders/gallery-3.jpg", alt: "Photo 3" },
-  { src: "/images/placeholders/gallery-4.jpg", alt: "Photo 4" },
-  { src: "/images/placeholders/gallery-5.jpg", alt: "Photo 5" },
-  { src: "/images/placeholders/gallery-6.jpg", alt: "Photo 6" },
-];
-
 export default function GalleryPage() {
   return (
-    <div className="pt-32 pb-24 min-h-screen bg-dark">
+    <div className="pt-32 pb-24 min-h-screen bg-off-white">
       <Container>
-        <SectionTitle 
-          title="फोटो गॅलरी"
-          eyebrow="क्षणचित्रे"
-          subtitle="विविध कार्यक्रम, विकासकामांचे उद्घाटन आणि जनसंवादातील काही खास क्षण."
-          className="mb-16"
-        />
+        <div className="text-center mb-16">
+          <span className="text-primary text-[14px] font-bold tracking-[0.1em] uppercase mb-4 block">
+            क्षणचित्रे
+          </span>
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-dark mb-6 tracking-tight drop-shadow-sm">
+            फोटो गॅलरी
+          </h1>
+          <div className="w-16 h-1 bg-primary mb-6 mx-auto"></div>
+          <p className="text-xl text-[#333333] max-w-2xl mx-auto leading-relaxed">
+            विविध कार्यक्रम, विकासकामांचे उद्घाटन आणि जनसंवादातील काही खास क्षण.
+          </p>
+        </div>
 
         <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-          {photos.map((photo, i) => (
-            <div 
-              key={i} 
-              className="break-inside-avoid relative rounded-xl overflow-hidden group cursor-pointer border border-white/5"
-            >
-              {/* Using a standard img tag here since it's a masonry layout, next/image with masonry requires specific setup */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img 
-                src={photo.src} 
-                alt={photo.alt} 
-                className="w-full h-auto transition-transform duration-700 group-hover:scale-105"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-dark/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <span className="text-white font-medium px-4 py-2 bg-accent/80 rounded-full text-sm">
-                  पहा
-                </span>
+          {galleryData.map((item) => {
+            if (item.image.status !== "available") return null;
+
+            return (
+              <div 
+                key={item.id} 
+                className="break-inside-avoid relative overflow-hidden group cursor-pointer border border-border shadow-sm bg-white p-2"
+              >
+                <div className="relative w-full overflow-hidden">
+                  <Image 
+                    src={item.image.src} 
+                    alt={item.image.alt || item.caption || ""}
+                    width={800}
+                    height={800}
+                    className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-[#8F3F16]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-6 text-center">
+                    <span className="text-white font-bold font-serif text-xl mb-2">
+                      {item.caption}
+                    </span>
+                    <span className="text-white/80 text-sm font-sans uppercase tracking-widest">
+                      {item.category}
+                    </span>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </Container>
     </div>

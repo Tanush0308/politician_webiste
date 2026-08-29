@@ -8,22 +8,19 @@ import { Container } from "@/components/ui/container";
 import { mediaRegistry } from "@/data/media";
 
 export function ConstituencyVisual() {
-  const bgImage = mediaRegistry.people.interaction2;
-
   return (
     <section className="py-24 relative overflow-hidden text-white border-b border-white/10">
-      {/* Background Image with Dark Overlay */}
-      {bgImage.status === "available" && (
-        <div className="absolute inset-0 z-0">
-          <Image 
-            src={bgImage.src} 
-            alt="Background"
-            fill
-            className="object-cover object-center mix-blend-overlay opacity-30 grayscale"
-          />
-        </div>
-      )}
-      <div className="absolute inset-0 bg-[#8F3F16]/95 z-0"></div>
+      {/* Background Image with Dark Saffron Overlay */}
+      <div className="absolute inset-0 z-0">
+        <Image 
+          src="/images/real/media_1788022631508.jpg" 
+          alt="Constituency Background"
+          fill
+          className="object-cover object-[center_30%]"
+        />
+      </div>
+      {/* Deep Saffron Brown Overlay with 80% opacity so image is visible but text is readable */}
+      <div className="absolute inset-0 bg-[#8F3F16]/80 z-0"></div>
       
       <Container className="relative z-10">
           <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
