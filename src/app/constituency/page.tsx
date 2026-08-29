@@ -13,28 +13,28 @@ export const metadata: Metadata = {
 export default function ConstituencyPage() {
   return (
     <div className="min-h-screen bg-off-white">
-      <div className="relative pt-32 pb-24 border-b border-border overflow-hidden bg-off-white">
+      <div className="relative pt-32 pb-32 border-b border-border overflow-hidden bg-dark">
         {mediaRegistry.constituency.flagHoisting.status === "available" && (
-          <>
-            <div className="absolute inset-0 z-0 pointer-events-none">
-              <Image 
-                src={mediaRegistry.constituency.flagHoisting.src} 
-                alt="Constituency Background"
-                fill
-                className="object-cover object-[center_30%]"
-              />
-            </div>
-            <div className="absolute inset-0 z-0 bg-off-white/75"></div>
-            <div className="absolute inset-0 z-0 bg-gradient-to-t from-off-white to-transparent"></div>
-          </>
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <Image 
+              src={mediaRegistry.constituency.flagHoisting.src} 
+              alt="Constituency Background"
+              fill
+              className="object-cover object-[center_30%]"
+            />
+            {/* Professional dark overlay: keeps image visible and vibrant while ensuring white text readability */}
+            <div className="absolute inset-0 z-0 bg-dark/50"></div>
+          </div>
         )}
         <Container className="relative z-10">
-          <SectionTitle 
-            title="माझा मतदारसंघ"
-            eyebrow="उस्मानाबाद - कळंब"
-            subtitle="ऐतिहासिक आणि सांस्कृतिक वारसा लाभलेला माझा मतदारसंघ. येथील जनतेच्या सर्वांगीण विकासासाठी आम्ही कटिबद्ध आहोत."
-            className="mb-16 text-dark"
-          />
+          <div className="text-white drop-shadow-md">
+            <SectionTitle 
+              title="माझा मतदारसंघ"
+              eyebrow="उस्मानाबाद - कळंब"
+              subtitle="ऐतिहासिक आणि सांस्कृतिक वारसा लाभलेला माझा मतदारसंघ. येथील जनतेच्या सर्वांगीण विकासासाठी आम्ही कटिबद्ध आहोत."
+              className="mb-16 text-white"
+            />
+          </div>
         </Container>
       </div>
 

@@ -51,26 +51,28 @@ export default function JourneyPage() {
 
   return (
     <div className="bg-off-white min-h-screen">
-      <div className="relative pt-32 pb-24 border-b border-border overflow-hidden bg-off-white">
-        {mediaRegistry.journey.wari.status === "available" && (
-          <div className="absolute inset-0 z-0 pointer-events-none mix-blend-multiply">
+      <div className="relative pt-32 pb-32 border-b border-border overflow-hidden bg-dark">
+        {mediaRegistry.journey.campaign.status === "available" && (
+          <div className="absolute inset-0 z-0 pointer-events-none">
             <Image 
-              src={mediaRegistry.journey.wari.src} 
+              src={mediaRegistry.journey.campaign.src} 
               alt="Wari Background"
               fill
-              className="object-cover object-center opacity-25"
+              className="object-cover object-[center_30%]"
             />
-            {/* Soft gradient to fade out bottom */}
-            <div className="absolute inset-0 bg-gradient-to-t from-off-white via-transparent to-transparent"></div>
+            {/* Professional dark overlay: keeps image visible and vibrant while ensuring white text readability */}
+            <div className="absolute inset-0 z-0 bg-dark/50"></div>
           </div>
         )}
         <Container className="relative z-10">
-          <SectionTitle 
-            title="माझा प्रवास"
-            eyebrow="एक संघर्षशील नेतृत्व"
-            subtitle="एका सामान्य शेतकरी कुटुंबातून आलेले नेतृत्व ते धाराशिवचे आमदार. जनतेच्या सेवेसाठी समर्पित असलेला हा प्रवास."
-            className="text-dark"
-          />
+          <div className="text-white drop-shadow-md">
+            <SectionTitle 
+              title="माझा प्रवास"
+              eyebrow="एक संघर्षशील नेतृत्व"
+              subtitle="एका सामान्य शेतकरी कुटुंबातून आलेले नेतृत्व ते धाराशिवचे आमदार. जनतेच्या सेवेसाठी समर्पित असलेला हा प्रवास."
+              className="text-white"
+            />
+          </div>
         </Container>
       </div>
 

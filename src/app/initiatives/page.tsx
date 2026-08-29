@@ -17,28 +17,28 @@ export default function InitiativesPage() {
 
   return (
     <div className="min-h-screen bg-off-white">
-      <div className="relative pt-32 pb-24 border-b border-border overflow-hidden bg-off-white">
+      <div className="relative pt-32 pb-32 border-b border-border overflow-hidden bg-dark">
         {mediaRegistry.assembly.speaking.status === "available" && (
-          <>
-            <div className="absolute inset-0 z-0 pointer-events-none">
-              <Image 
-                src={mediaRegistry.assembly.speaking.src} 
-                alt="Assembly Background"
-                fill
-                className="object-cover object-center"
-              />
-            </div>
-            <div className="absolute inset-0 z-0 bg-off-white/75"></div>
-            <div className="absolute inset-0 z-0 bg-gradient-to-t from-off-white to-transparent"></div>
-          </>
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <Image 
+              src={mediaRegistry.assembly.speaking.src} 
+              alt="Assembly Background"
+              fill
+              className="object-cover object-[center_30%]"
+            />
+            {/* Professional dark overlay: keeps image visible and vibrant while ensuring white text readability */}
+            <div className="absolute inset-0 z-0 bg-dark/50"></div>
+          </div>
         )}
         <Container className="relative z-10">
-          <SectionTitle 
-            title="विकासकामे"
-            eyebrow="एक काम. एक कथा."
-            subtitle="मतदारसंघाच्या सर्वांगीण विकासासाठी आणि जनतेचे जीवनमान उंचावण्यासाठी राबवलेले मुख्य उपक्रम."
-            className="mb-16 text-dark"
-          />
+          <div className="text-white drop-shadow-md">
+            <SectionTitle 
+              title="विकासकामे"
+              eyebrow="एक काम. एक कथा."
+              subtitle="मतदारसंघाच्या सर्वांगीण विकासासाठी आणि जनतेचे जीवनमान उंचावण्यासाठी राबवलेले मुख्य उपक्रम."
+              className="mb-16 text-white"
+            />
+          </div>
         </Container>
       </div>
 
