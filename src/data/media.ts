@@ -46,6 +46,21 @@ export const mediaRegistry: {
     }
   },
   journey: {
+    campaign: {
+      src: "/images/real/media_1788018244760.jpg",
+      alt: "Election Campaign",
+      status: "available",
+    },
+    speech: {
+      src: "/images/real/media_1788018240686.jpg",
+      alt: "Public Speech",
+      status: "available",
+    },
+    interaction: {
+      src: "/images/real/media_1788018248434.jpg",
+      alt: "People Interaction",
+      status: "available",
+    },
     election2024: {
       src: "/images/real/media_1788005986170.png",
       alt: "Felicitation and Recognition",
