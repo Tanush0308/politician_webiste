@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dark: #0A0A0A;
+  --color-dark-secondary: #151515;
+  --color-light-bg: #F5F1E8;
+  --color-light: #F5F5F5;
+  --color-dark-text: #171717;
+  --color-accent: #FF7722;
+  --color-accent-hover: #e5661a;
+  
+  --font-sans: var(--font-noto-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-noto-serif), ui-serif, Georgia, serif;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-dark);
+    color: var(--color-light);
+  }
+}
+
