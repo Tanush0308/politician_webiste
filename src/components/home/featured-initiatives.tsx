@@ -8,6 +8,7 @@ import { Container } from "@/components/ui/container";
 import { SectionTitle } from "@/components/typography/section-title";
 import { getInitiatives } from "@/data/initiatives";
 import { MediaPlaceholder } from "@/components/ui/media-placeholder";
+import { mediaRegistry } from "@/data/media";
 
 export function FeaturedInitiatives() {
   const initiatives = getInitiatives().slice(0, 5); // 4 regular + 1 featured
@@ -17,12 +18,24 @@ export function FeaturedInitiatives() {
   const list = initiatives.slice(1);
 
   return (
-    <section className="py-24 bg-white relative border-y border-border">
-      <Container>
+    <section className="py-24 bg-stone-50 relative border-y border-border overflow-hidden">
+      {/* Faint Background Image */}
+      {mediaRegistry.journey.election2024.status === "available" && (
+        <div className="absolute inset-0 z-0 pointer-events-none mix-blend-multiply">
+          <Image 
+            src={mediaRegistry.journey.election2024.src} 
+            alt="Background"
+            fill
+            className="object-cover object-[center_30%] opacity-[0.06]"
+          />
+        </div>
+      )}
+
+      <Container className="relative z-10">
         <SectionTitle 
           title="माझी कामं"
           eyebrow="कामं बोलतात"
-          className="mb-16 text-dark"
+          className="mb-16 text-dark drop-shadow-sm"
         />
 
         <div className="flex flex-col space-y-24">
@@ -36,7 +49,7 @@ export function FeaturedInitiatives() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="flex flex-col border border-border p-8 hover:shadow-lg transition-shadow bg-white"
+                className="flex flex-col border border-border/50 p-8 hover:shadow-xl transition-all duration-300 bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm hover:-translate-y-1"
               >
                 <span className="text-primary font-sans font-bold tracking-[0.1em] text-[12px] uppercase block mb-4">
                   {initiative.category}
@@ -49,7 +62,7 @@ export function FeaturedInitiatives() {
                 </p>
                 <Link 
                   href={`/initiatives/${initiative.slug}`}
-                  className="inline-flex items-center text-[14px] font-bold tracking-widest text-dark hover:text-accent transition-colors"
+                  className="inline-flex items-center text-[14px] font-bold tracking-widest text-dark hover:text-accent transition-colors w-max"
                 >
                   सविस्तर वाचा <span className="ml-2">&rarr;</span>
                 </Link>
@@ -58,12 +71,12 @@ export function FeaturedInitiatives() {
           </div>
 
           {/* Featured Initiative (Image + Text) */}
-          <div className="flex flex-col lg:flex-row gap-0 border border-border overflow-hidden bg-off-white">
+          <div className="flex flex-col lg:flex-row gap-0 border border-border/50 overflow-hidden bg-white/90 backdrop-blur-md rounded-3xl shadow-xl">
             <motion.div 
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="lg:w-3/5 relative aspect-video lg:aspect-[16/9] border-b lg:border-b-0 lg:border-r border-border overflow-hidden"
+              className="lg:w-3/5 relative aspect-video lg:aspect-[16/9] border-b lg:border-b-0 lg:border-r border-border/50 overflow-hidden"
             >
               {featured.heroImage?.status === "available" ? (
                 <Image
@@ -87,7 +100,7 @@ export function FeaturedInitiatives() {
                 <span className="text-primary font-sans tracking-[0.1em] text-[14px] font-bold uppercase block mb-4">
                   महत्त्वाचे प्रकल्प — {featured.category}
                 </span>
-                <h3 className="text-3xl lg:text-4xl font-bold font-serif mb-6 leading-tight text-dark">
+                <h3 className="text-3xl lg:text-4xl font-bold font-serif mb-6 leading-tight text-dark drop-shadow-sm">
                   {featured.title}
                 </h3>
                 <p className="text-[17px] md:text-[19px] text-dark/80 mb-8 leading-[1.7]">
@@ -105,7 +118,7 @@ export function FeaturedInitiatives() {
 
                 <Link 
                   href={`/initiatives/${featured.slug}`}
-                  className="inline-flex items-center text-[15px] font-bold tracking-widest text-primary hover:text-accent-hover transition-colors"
+                  className="inline-flex items-center text-[15px] font-bold tracking-widest text-white bg-dark hover:bg-accent hover:text-white px-6 py-3 rounded-full transition-colors w-max"
                 >
                   सविस्तर वाचा <span className="ml-2">&rarr;</span>
                 </Link>
@@ -118,7 +131,7 @@ export function FeaturedInitiatives() {
         <div className="mt-16 pt-8 flex justify-center">
           <Link 
             href="/initiatives"
-            className="inline-flex items-center justify-center px-8 py-4 border border-dark text-[15px] font-bold font-sans text-dark hover:bg-dark hover:text-white transition-colors"
+            className="inline-flex items-center justify-center px-8 py-4 border border-dark rounded-full text-[15px] font-bold font-sans text-dark hover:bg-dark hover:text-white transition-colors shadow-sm"
           >
             सर्व विकासकामे पहा
           </Link>
