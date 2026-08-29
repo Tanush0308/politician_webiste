@@ -72,7 +72,7 @@ export const mediaRegistry: {
       status: "available",
     },
     wari: {
-      src: "/images/real/media_1788009761332.png",
+      src: "/images/real/media_1788009658808.png",
       alt: "Wari with citizens",
       status: "available",
     },
@@ -113,14 +113,14 @@ export const mediaRegistry: {
   },
   assembly: {
     speaking: {
-      src: "/images/real/media_1788009695425.png",
+      src: "/images/real/media_1788009620986.jpg",
       alt: "Speaking in Assembly",
       status: "available",
     }
   },
   constituency: {
     flagHoisting: {
-      src: "/images/real/media_1788009748375.png",
+      src: "/images/real/media_1788009575049.png",
       alt: "Flag Hoisting at Collector Office",
       status: "available",
     }
