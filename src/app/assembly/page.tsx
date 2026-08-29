@@ -12,10 +12,8 @@ export const metadata: Metadata = {
 };
 
 const assemblyStats = [
-  { icon: Mic, label: "उपस्थित केलेले प्रश्न", value: "२५०+" },
-  { icon: FileText, label: "मांडलेली विधेयके", value: "१५+" },
-  { icon: Users, label: "सभागृहातील उपस्थिती", value: "९५%" },
-  { icon: CheckCircle, label: "सोडवलेले प्रश्न", value: "२००+" },
+  { icon: Mic, label: "विधानसभेत उपस्थित केलेले प्रश्न", value: "८९" },
+  { icon: Users, label: "सभागृहातील उपस्थिती", value: "९४.५%" }
 ];
 
 export default function AssemblyPage() {
@@ -55,7 +53,7 @@ export default function AssemblyPage() {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-24">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 mb-6 max-w-3xl mx-auto">
           {assemblyStats.map((stat, i) => (
             <div key={i} className="bg-white p-8 border border-border border-t-4 border-t-[#C85C32] shadow-sm text-center flex flex-col items-center hover:-translate-y-1 transition-transform">
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6">
@@ -66,33 +64,73 @@ export default function AssemblyPage() {
             </div>
           ))}
         </div>
+        
+        <div className="text-center mb-24">
+          <p className="text-sm text-muted-foreground">
+            स्रोत: <a href="https://prsindia.org/mlatrack/kailas-balasaheb-ghadge-patil" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">PRS Legislative Research (२०१९-२०२४)</a>
+          </p>
+        </div>
 
         {/* Recent Questions */}
         <div>
           <h2 className="text-3xl font-bold font-serif mb-12 text-center text-dark">महत्त्वाचे प्रश्न आणि लक्षवेधी</h2>
-          <div className="space-y-6 max-w-4xl mx-auto">
+          <div className="space-y-8 max-w-4xl mx-auto">
             {assemblyQuestions.map((q, i) => (
-              <div key={q.id} className="bg-white p-6 md:p-8 border border-border shadow-sm flex flex-col md:flex-row gap-6 md:items-start group hover:border-primary/30 transition-colors">
-                <div className="md:w-1/4 shrink-0">
+              <div key={q.id} className="bg-white p-6 md:p-8 border border-border shadow-sm group hover:border-primary/30 transition-colors">
+                
+                {/* Header */}
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 pb-6 border-b border-border/50 gap-4">
+                  <h3 className="font-bold text-xl md:text-2xl text-dark font-serif">{q.topic}</h3>
                   {q.date && (
-                    <span className="inline-block bg-[#FAF9F6] border border-[#EFE6DA] text-[#333333] px-3 py-1 text-xs font-bold uppercase tracking-wider mb-3 shadow-sm">
+                    <span className="inline-block bg-[#FAF9F6] border border-[#EFE6DA] text-[#333333] px-3 py-1 text-xs font-bold uppercase tracking-wider shadow-sm whitespace-nowrap">
                       {q.date}
                     </span>
                   )}
-                  <h3 className="font-bold text-lg text-dark group-hover:text-primary transition-colors">{q.topic}</h3>
                 </div>
-                <div className="md:w-3/4 flex flex-col justify-between">
-                  <p className="text-[#333333] leading-relaxed mb-6 font-medium">{q.description}</p>
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div className="inline-flex items-center text-sm font-bold text-[#C85C32]">
-                      <CheckCircle className="w-4 h-4 mr-2" />
-                      {q.status}
+
+                {/* Content Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+                  
+                  {/* Left Column: Issue & Action */}
+                  <div className="md:col-span-7 space-y-6">
+                    <div>
+                      <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2 block">समस्या</span>
+                      <p className="text-[#333333] leading-relaxed font-medium">{q.issue}</p>
                     </div>
+                    <div>
+                      <span className="text-xs font-bold uppercase tracking-widest text-primary mb-2 block">विधानसभेतील भूमिका</span>
+                      <p className="text-dark leading-relaxed font-bold">{q.action}</p>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Gov Response & Status */}
+                  <div className="md:col-span-5 space-y-6 md:border-l md:border-border/50 md:pl-8">
+                    {q.govResponse && (
+                      <div>
+                        <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2 block">शासनाची प्रतिक्रिया</span>
+                        <p className="text-[#333333] text-sm leading-relaxed">{q.govResponse}</p>
+                      </div>
+                    )}
+                    
+                    {q.currentStatus && (
+                      <div>
+                        <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2 block">सध्याची स्थिती</span>
+                        <div className="inline-flex items-center text-sm font-bold text-[#C85C32] bg-primary/5 px-3 py-1.5 rounded-full">
+                          <CheckCircle className="w-4 h-4 mr-2" />
+                          {q.currentStatus}
+                        </div>
+                      </div>
+                    )}
+
                     {q.sources && q.sources.length > 0 && (
-                      <span className="text-xs text-muted-foreground">स्रोत: {q.sources[0].label}</span>
+                      <div className="pt-4 mt-4 border-t border-border/30">
+                        <span className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground mr-2">स्रोत:</span>
+                        <span className="text-xs text-muted-foreground">{q.sources.map(s => s.label).join(", ")}</span>
+                      </div>
                     )}
                   </div>
                 </div>
+
               </div>
             ))}
           </div>
