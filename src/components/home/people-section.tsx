@@ -11,7 +11,7 @@ export function PeopleSection() {
   const photo1 = mediaRegistry.people.interaction1;
 
   return (
-    <section className="py-24 md:py-32 bg-[#1C1C1C] text-white relative border-b border-border overflow-hidden">
+    <section className="py-24 md:py-32 bg-dark text-white relative border-b border-border overflow-hidden">
       {/* Background Image Watermark */}
       {mediaRegistry.journey.interaction.status === "available" && (
         <div className="absolute inset-0 z-0 pointer-events-none">

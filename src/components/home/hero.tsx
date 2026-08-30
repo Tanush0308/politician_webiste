@@ -51,12 +51,12 @@ export function Hero() {
                   className="object-cover" 
                 />
               </div>
-              <span className="text-base md:text-lg font-bold tracking-widest text-[#151515] uppercase font-sans mt-0.5">
+              <span className="text-base md:text-lg font-bold tracking-widest text-dark uppercase font-sans mt-0.5">
                 {personData.party}
               </span>
             </div>
             
-            <h1 className="text-5xl md:text-6xl lg:text-[5.5rem] font-serif font-bold text-[#151515] leading-[1.1] mb-6 tracking-tight drop-shadow-sm">
+            <h1 className="text-5xl md:text-6xl lg:text-[5.5rem] font-serif font-bold text-dark leading-[1.1] mb-6 tracking-tight drop-shadow-sm">
               <span className="block mb-2">{personData.nameMr.split(' ')[0]} {personData.nameMr.split(' ')[1]}</span>
               <span className="text-primary">{personData.nameMr.split(' ')[2]}</span>
             </h1>
@@ -75,7 +75,7 @@ export function Hero() {
               
               <Link 
                 href="/journey" 
-                className="bg-white/80 backdrop-blur-sm border border-[#151515] text-[#151515] hover:bg-[#151515] hover:text-white px-7 py-3.5 text-[15px] font-bold transition-all"
+                className="bg-white/80 backdrop-blur-sm border border-dark text-dark hover:bg-dark hover:text-white px-7 py-3.5 text-[15px] font-bold transition-all"
               >
                 माझा प्रवास
               </Link>
