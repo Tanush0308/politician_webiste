@@ -42,8 +42,8 @@ export function Hero() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="w-full lg:w-1/2 flex flex-col"
           >
-            <div className="inline-flex items-center gap-3 px-2 py-2 bg-white/90 backdrop-blur-sm border border-[#EFE6DA] shadow-sm mb-6 self-start rounded-full pr-6">
-              <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 shadow-sm border border-black/5">
+            <div className="inline-flex items-center gap-4 px-3 py-3 bg-white/90 backdrop-blur-sm border border-[#EFE6DA] shadow-md mb-6 self-start rounded-full pr-8">
+              <div className="relative w-16 h-16 rounded-full overflow-hidden shrink-0 shadow-sm border border-black/10">
                 <Image 
                   src="/images/real/party_logo.png" 
                   alt="Party Logo" 
@@ -51,7 +51,7 @@ export function Hero() {
                   className="object-cover" 
                 />
               </div>
-              <span className="text-sm font-bold tracking-widest text-[#151515] uppercase font-sans mt-0.5">
+              <span className="text-base md:text-lg font-bold tracking-widest text-[#151515] uppercase font-sans mt-0.5">
                 {personData.party}
               </span>
             </div>
