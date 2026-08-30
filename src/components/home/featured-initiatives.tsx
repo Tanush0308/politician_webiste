@@ -17,11 +17,11 @@ export function FeaturedInitiatives() {
   if (initiatives.length === 0) return null;
 
   return (
-    <section className="relative py-24 bg-[#0a0a0a] overflow-hidden text-white border-y border-white/5">
+    <section className="relative py-24 bg-off-white overflow-hidden text-dark border-y border-border">
       
-      {/* Deep Black Theme Background Layer */}
+      {/* Light Theme Background Layer */}
       {isElectionMediaAvailable && (
-        <div className="absolute inset-0 z-0 pointer-events-none mix-blend-overlay opacity-10">
+        <div className="absolute inset-0 z-0 pointer-events-none mix-blend-multiply opacity-[0.03]">
           <Image 
             src={electionMedia.src}
             alt={electionMedia.alt || "Background"}
@@ -30,21 +30,20 @@ export function FeaturedInitiatives() {
           />
         </div>
       )}
-      <div className="absolute inset-0 bg-[#0a0a0a]/95 z-0"></div>
 
       <Container className="relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16">
           <div className="max-w-2xl">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-6">ठळक कामं</h2>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-dark mb-6">ठळक कामं</h2>
             <div className="w-16 h-1 bg-primary mb-6"></div>
-            <p className="text-xl text-[#A0A0A0] leading-relaxed">
+            <p className="text-xl text-[#333333] leading-relaxed">
               मतदारसंघाच्या विकासासाठी आणि जनतेच्या कल्याणासाठी राबवलेले प्रमुख उपक्रम.
             </p>
           </div>
           
           <Link 
             href="/initiatives" 
-            className="hidden md:inline-flex items-center text-[15px] font-bold text-primary hover:text-white transition-colors"
+            className="hidden md:inline-flex items-center text-[15px] font-bold text-primary hover:text-dark transition-colors"
           >
             सर्व कामं पहा <span className="ml-2">&rarr;</span>
           </Link>
@@ -58,9 +57,9 @@ export function FeaturedInitiatives() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1, duration: 0.6 }}
-              className="bg-[#111111] border border-white/5 overflow-hidden group hover:border-primary/50 transition-colors"
+              className="bg-white border border-border overflow-hidden shadow-sm group hover:border-primary/40 transition-colors"
             >
-              <div className="relative h-64 overflow-hidden bg-black/20">
+              <div className="relative h-64 overflow-hidden bg-black/5">
                 {initiative.heroImage?.status === "available" ? (
                   <Image 
                     src={initiative.heroImage.src} 
@@ -71,22 +70,21 @@ export function FeaturedInitiatives() {
                 ) : (
                   <MediaPlaceholder category="INITIATIVE" aspectRatio="video" />
                 )}
-                <div className="absolute inset-0 bg-black/20"></div>
-                <div className="absolute top-4 right-4 bg-primary text-white text-xs font-bold px-3 py-1">
+                <div className="absolute top-4 right-4 bg-primary text-white text-xs font-bold px-3 py-1 shadow-sm">
                   {initiative.category}
                 </div>
               </div>
               
               <div className="p-8">
-                <h3 className="text-2xl font-bold font-serif text-white mb-4 group-hover:text-primary transition-colors">
+                <h3 className="text-2xl font-bold font-serif text-dark mb-4 group-hover:text-primary transition-colors">
                   {initiative.title}
                 </h3>
-                <p className="text-[#A0A0A0] leading-relaxed mb-6">
+                <p className="text-[#333333] leading-relaxed mb-6 font-medium">
                   {initiative.shortDescription}
                 </p>
                 <Link 
                   href={`/initiatives/${initiative.slug}`}
-                  className="inline-flex items-center text-sm font-bold text-white group-hover:text-primary transition-colors"
+                  className="inline-flex items-center text-sm font-bold text-primary group-hover:text-dark transition-colors"
                 >
                   सविस्तर वाचा <span className="ml-2">&rarr;</span>
                 </Link>
