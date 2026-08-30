@@ -1,8 +1,8 @@
 import { Container } from "@/components/ui/container";
 import { SectionTitle } from "@/components/typography/section-title";
 import { Metadata } from "next";
-import Image from "next/image";
 import { galleryData } from "@/data/gallery";
+import { GalleryGrid } from "@/components/gallery/gallery-grid";
 
 export const metadata: Metadata = {
   title: "गॅलरी | Photo & Video Gallery | Kailas Dada Patil",
@@ -26,37 +26,7 @@ export default function GalleryPage() {
           </p>
         </div>
 
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-          {galleryData.map((item) => {
-            if (item.image.status !== "available") return null;
-
-            return (
-              <div 
-                key={item.id} 
-                className="break-inside-avoid relative overflow-hidden group cursor-pointer border border-border shadow-sm bg-white p-2"
-              >
-                <div className="relative w-full overflow-hidden">
-                  <Image 
-                    src={item.image.src} 
-                    alt={item.image.alt || item.caption || ""}
-                    width={800}
-                    height={800}
-                    className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-[#8F3F16]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-6 text-center">
-                    <span className="text-white font-bold font-serif text-xl mb-2">
-                      {item.caption}
-                    </span>
-                    <span className="text-white/80 text-sm font-sans uppercase tracking-widest">
-                      {item.category}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <GalleryGrid items={galleryData} />
       </Container>
     </div>
   );

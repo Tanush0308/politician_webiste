@@ -32,18 +32,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-const statusMap: Record<string, string> = {
-  "Demand": "मागणी केली",
-  "Follow-up": "पाठपुरावा सुरू",
-  "Question Raised": "प्रश्न उपस्थित केला",
-  "Representation Submitted": "निवेदन दिले",
-  "Approved": "मंजुरी मिळाली",
-  "In Progress": "काम प्रगतीपथावर आहे",
-  "Partially Implemented": "अंशतः अंमलबजावणी",
-  "Completed": "काम पूर्ण झाले",
-  "Status Unclear": "सद्यस्थिती अस्पष्ट"
-};
-
 export default async function InitiativeDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const initiative = getInitiativeBySlug(slug);
@@ -52,7 +40,7 @@ export default async function InitiativeDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  const translatedStatus = initiative.status ? (statusMap[initiative.status] || initiative.status) : null;
+  const translatedStatus = initiative.status;
 
   return (
     <div className="bg-dark min-h-screen">
@@ -105,25 +93,25 @@ export default async function InitiativeDetailPage({ params }: PageProps) {
             <div className="space-y-6 text-lg text-light/80 leading-relaxed font-sans">
               {initiative.problem && (
                 <div>
-                  <h3 className="text-xl font-serif text-white mb-2">समस्या / पार्श्वभूमी</h3>
+                  <h3 className="text-xl font-serif text-white mb-2">समस्या</h3>
                   <p>{initiative.problem}</p>
                 </div>
               )}
               {initiative.action && (
                 <div>
-                  <h3 className="text-xl font-serif text-white mb-2">उपाययोजना / मागणी</h3>
+                  <h3 className="text-xl font-serif text-white mb-2">भूमिका</h3>
                   <p>{initiative.action}</p>
                 </div>
               )}
               {initiative.governmentResponse && (
                 <div>
-                  <h3 className="text-xl font-serif text-white mb-2">शासनाचे उत्तर / प्रतिसाद</h3>
+                  <h3 className="text-xl font-serif text-white mb-2">सरकारी प्रतिसाद</h3>
                   <p>{initiative.governmentResponse}</p>
                 </div>
               )}
               {initiative.result && (
                 <div>
-                  <h3 className="text-xl font-serif text-white mb-2">परिणाम / सद्यस्थिती</h3>
+                  <h3 className="text-xl font-serif text-white mb-2">सद्यस्थिती व परिणाम</h3>
                   <p>{initiative.result}</p>
                 </div>
               )}
@@ -218,25 +206,25 @@ export default async function InitiativeDetailPage({ params }: PageProps) {
             <article className="prose prose-invert prose-lg max-w-none prose-p:text-light/80 prose-p:leading-relaxed prose-headings:font-serif prose-headings:text-white">
               {initiative.problem && (
                 <>
-                  <h3 className="text-xl font-serif mb-6 text-white border-l-2 border-accent pl-4">समस्या / पार्श्वभूमी</h3>
+                  <h3 className="text-xl font-serif mb-6 text-white border-l-2 border-accent pl-4">समस्या</h3>
                   <p className="mb-6">{initiative.problem}</p>
                 </>
               )}
               {initiative.action && (
                 <>
-                  <h3 className="text-xl font-serif mt-12 mb-6 text-white border-l-2 border-accent pl-4">उपाययोजना / मागणी</h3>
+                  <h3 className="text-xl font-serif mt-12 mb-6 text-white border-l-2 border-accent pl-4">भूमिका</h3>
                   <p className="mb-6">{initiative.action}</p>
                 </>
               )}
               {initiative.governmentResponse && (
                 <>
-                  <h3 className="text-xl font-serif mt-12 mb-6 text-white border-l-2 border-accent pl-4">शासनाचे उत्तर / प्रतिसाद</h3>
+                  <h3 className="text-xl font-serif mt-12 mb-6 text-white border-l-2 border-accent pl-4">सरकारी प्रतिसाद</h3>
                   <p className="mb-6">{initiative.governmentResponse}</p>
                 </>
               )}
               {initiative.result && (
                 <>
-                  <h3 className="text-xl font-serif mt-12 mb-6 text-white border-l-2 border-accent pl-4">परिणाम / सद्यस्थिती</h3>
+                  <h3 className="text-xl font-serif mt-12 mb-6 text-white border-l-2 border-accent pl-4">सद्यस्थिती व परिणाम</h3>
                   <p className="mb-6">{initiative.result}</p>
                 </>
               )}

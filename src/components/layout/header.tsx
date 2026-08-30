@@ -48,8 +48,8 @@ export function Header() {
           isScrolled ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-border py-3" : "bg-white border-b border-border py-4"
         )}
       >
-        <Container className="flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 group">
+        <Container className="flex items-center justify-between relative">
+          <Link href="/" className="flex items-center gap-2 group z-10 relative">
             <div className="flex flex-col leading-tight">
               <span className="text-xl md:text-2xl font-bold font-serif text-dark group-hover:text-primary transition-colors">
                 {siteConfig.siteName}
@@ -60,8 +60,8 @@ export function Header() {
             </div>
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-2">
+          {/* Desktop Nav - Centered absolutely */}
+          <nav className="hidden lg:flex items-center gap-2 absolute left-1/2 -translate-x-1/2 z-0">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
@@ -84,19 +84,21 @@ export function Header() {
                 </Link>
               );
             })}
-            <div className="ml-4">
-              <Link 
-                href="/contact"
-                className="bg-primary text-white px-6 py-2.5 rounded text-[15px] font-bold font-sans hover:bg-accent-hover transition-colors"
-              >
-                संपर्क
-              </Link>
-            </div>
           </nav>
+
+          {/* Contact Right */}
+          <div className="hidden lg:flex ml-4 z-10 relative">
+            <Link 
+              href="/contact"
+              className="bg-primary text-white px-6 py-2.5 rounded text-[15px] font-bold font-sans hover:bg-accent-hover transition-colors"
+            >
+              संपर्क
+            </Link>
+          </div>
 
           {/* Mobile Toggle */}
           <button
-            className="lg:hidden text-dark p-2 focus:outline-none"
+            className="lg:hidden text-dark p-2 focus:outline-none z-10 relative"
             onClick={() => setMobileMenuOpen(true)}
             aria-label="Open menu"
           >

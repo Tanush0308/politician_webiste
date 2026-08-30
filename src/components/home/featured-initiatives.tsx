@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { getInitiatives } from "@/data/initiatives";
 import { MediaPlaceholder } from "@/components/ui/media-placeholder";
 import { mediaRegistry } from "@/data/media";
@@ -51,21 +52,19 @@ export function FeaturedInitiatives() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {initiatives.map((initiative, idx) => (
-            <motion.div
+            <ScrollReveal
               key={initiative.slug}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1, duration: 0.6 }}
-              className="bg-white border border-border overflow-hidden shadow-sm group hover:border-primary/40 transition-colors"
+              delay={idx * 0.1}
+              direction="up"
+              className="bg-white border border-border overflow-hidden shadow-sm group hover:border-primary/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-md flex flex-col h-full"
             >
-              <div className="relative h-64 overflow-hidden bg-black/5">
+              <div className="relative h-64 overflow-hidden bg-black/5 shrink-0">
                 {initiative.heroImage?.status === "available" ? (
                   <Image 
                     src={initiative.heroImage.src} 
                     alt={initiative.heroImage.alt || initiative.title} 
                     fill 
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                   />
                 ) : (
                   <MediaPlaceholder category="INITIATIVE" aspectRatio="video" />
@@ -75,21 +74,21 @@ export function FeaturedInitiatives() {
                 </div>
               </div>
               
-              <div className="p-8">
-                <h3 className="text-2xl font-bold font-serif text-dark mb-4 group-hover:text-primary transition-colors">
+              <div className="p-8 flex flex-col flex-1">
+                <h3 className="h3 mb-4 group-hover:text-primary transition-colors">
                   {initiative.title}
                 </h3>
-                <p className="text-[#333333] leading-relaxed mb-6 font-medium">
+                <p className="text-[#333333] leading-relaxed mb-6 font-medium flex-1">
                   {initiative.shortDescription}
                 </p>
                 <Link 
                   href={`/initiatives/${initiative.slug}`}
-                  className="inline-flex items-center text-sm font-bold text-primary group-hover:text-dark transition-colors"
+                  className="inline-flex items-center text-sm font-bold text-primary group-hover:text-dark transition-colors self-start"
                 >
-                  सविस्तर वाचा <span className="ml-2">&rarr;</span>
+                  सविस्तर वाचा <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
                 </Link>
               </div>
-            </motion.div>
+            </ScrollReveal>
           ))}
         </div>
         

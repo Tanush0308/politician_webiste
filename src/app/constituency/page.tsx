@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/container";
 import { SectionTitle } from "@/components/typography/section-title";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { Metadata } from "next";
 import { mediaRegistry } from "@/data/media";
 import Image from "next/image";
@@ -54,7 +55,12 @@ export default function ConstituencyPage() {
 
           <div className="flex flex-col border-t-2 border-dark">
             {constituencyData.stats.map((stat, index) => (
-              <div key={stat.id} className="flex flex-col md:flex-row md:items-start py-10 border-b border-border group hover:bg-white transition-colors gap-6 md:gap-24 px-4 -mx-4 rounded">
+              <ScrollReveal 
+                key={stat.id} 
+                direction="up" 
+                delay={index * 0.1}
+                className="flex flex-col md:flex-row md:items-start py-10 border-b border-border group hover:bg-white transition-colors gap-6 md:gap-24 px-4 -mx-4 rounded"
+              >
                 <div className="md:w-1/3 flex flex-col gap-2">
                   <div className="flex items-center gap-6">
                     <span className="text-[12px] font-sans font-bold tracking-[0.2em] text-muted w-8 shrink-0">
@@ -64,21 +70,21 @@ export default function ConstituencyPage() {
                   </div>
                   {stat.sources && stat.sources.length > 0 && (
                     <div className="ml-14 mt-2">
-                      <span className="text-xs text-muted-foreground">स्रोत: {stat.sources[0].label}</span>
+                      <span className="text-xs text-muted-foreground uppercase tracking-widest font-bold">स्रोत / Source: {stat.sources[0].label}</span>
                     </div>
                   )}
                 </div>
                 <div className="md:w-2/3">
-                  <p className="text-[18px] md:text-[20px] text-dark/70 font-sans leading-relaxed group-hover:text-dark transition-colors mb-2">
+                  <p className="text-[20px] md:text-[24px] font-bold text-dark font-sans leading-relaxed group-hover:text-primary transition-colors mb-2">
                     {stat.value}
                   </p>
                   {stat.description && (
-                    <p className="text-sm text-dark/50">
+                    <p className="text-sm md:text-base text-dark/70 font-medium">
                       {stat.description}
                     </p>
                   )}
                 </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>

@@ -42,15 +42,15 @@ export interface VideoAsset {
 }
 
 export type InitiativeStatus =
-  | "Demand"
-  | "Follow-up"
-  | "Question Raised"
-  | "Representation Submitted"
-  | "Approved"
-  | "In Progress"
-  | "Partially Implemented"
-  | "Completed"
-  | "Status Unclear";
+  | "मागणी केली"
+  | "पाठपुरावा सुरू"
+  | "प्रश्न उपस्थित केला"
+  | "निवेदन दिले"
+  | "आंदोलन केले"
+  | "मंजुरी मिळाली"
+  | "निधी मंजूर झाला"
+  | "काम सुरू झाले"
+  | "काम पूर्ण झाले";
 
 export interface Initiative {
   slug: string;

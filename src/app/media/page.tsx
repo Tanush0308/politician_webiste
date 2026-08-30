@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/container";
 import { SectionTitle } from "@/components/typography/section-title";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { Metadata } from "next";
 import { newsArticles } from "@/data/news";
 import Image from "next/image";
@@ -43,7 +44,7 @@ export default function MediaPage() {
           
           {/* Featured Article */}
           {featuredNews && (
-            <div className="border-t-2 border-dark pt-8">
+            <ScrollReveal direction="up" delay={0.1} className="border-t-2 border-dark pt-8">
               <span className="text-[12px] md:text-[14px] text-primary tracking-[0.2em] font-bold uppercase block mb-6">विशेष बातमी</span>
               <div className="flex flex-col md:flex-row gap-8 lg:gap-16">
                 <div className="md:w-2/3">
@@ -72,12 +73,12 @@ export default function MediaPage() {
                   )}
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
           )}
 
           {/* Regular List */}
           <div className="flex flex-col border-t-2 border-dark pt-2">
-            {regularNews.map((news) => {
+            {regularNews.map((news, idx) => {
               const isClickable = news.verification === "verified" && !!news.originalUrl;
               
               const rowContent = (
@@ -106,24 +107,28 @@ export default function MediaPage() {
                 </div>
               );
 
-              if (isClickable) {
-                return (
-                  <a 
-                    key={news.id} 
-                    href={news.originalUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="group border-b border-border py-8 hover:bg-white transition-colors block px-4 -mx-4 rounded"
-                  >
-                    {rowContent}
-                  </a>
-                );
-              }
-
               return (
-                <div key={news.id} className="border-b border-border py-8 block opacity-70 px-4 -mx-4">
-                  {rowContent}
-                </div>
+                <ScrollReveal 
+                  key={news.id} 
+                  direction="up" 
+                  delay={(idx % 5) * 0.1} 
+                  className={!isClickable ? "opacity-70" : ""}
+                >
+                  {isClickable ? (
+                    <a 
+                      href={news.originalUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="group border-b border-border py-8 hover:bg-white transition-colors block px-4 -mx-4 rounded"
+                    >
+                      {rowContent}
+                    </a>
+                  ) : (
+                    <div className="border-b border-border py-8 block px-4 -mx-4">
+                      {rowContent}
+                    </div>
+                  )}
+                </ScrollReveal>
               );
             })}
           </div>
