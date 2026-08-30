@@ -92,7 +92,7 @@ export default function JourneyPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-7xl xl:text-9xl font-bold font-serif text-primary tracking-tighter"
+                className="text-7xl xl:text-9xl font-bold font-serif text-primary tracking-tighter mix-blend-multiply opacity-90"
               >
                 {activeYear}
               </motion.div>
