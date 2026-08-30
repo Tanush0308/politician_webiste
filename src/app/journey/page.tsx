@@ -51,26 +51,31 @@ export default function JourneyPage() {
 
   return (
     <div className="bg-off-white min-h-screen">
-      <div className="relative pt-32 pb-32 border-b border-border overflow-hidden bg-dark">
-        {mediaRegistry.journey.campaign.status === "available" && (
-          <div className="absolute inset-0 z-0 pointer-events-none">
-            <Image 
-              src={mediaRegistry.journey.campaign.src} 
-              alt="Wari Background"
-              fill
-              className="object-cover object-[center_30%]"
-            />
-            {/* Professional dark overlay: keeps image visible and vibrant while ensuring white text readability */}
-            <div className="absolute inset-0 z-0 bg-dark/50"></div>
-          </div>
-        )}
-        <Container className="relative z-10">
-          <div className="text-white drop-shadow-md">
+      <div className="relative pt-32 pb-32 md:pt-40 md:pb-40 border-b border-border overflow-hidden bg-off-white">
+        
+        {/* Right Side Image with Fade */}
+        <div className="absolute inset-y-0 right-0 w-full md:w-[60%] lg:w-[50%] z-0">
+          <Image 
+            src="/images/real/journey_hero_mic.jpg" 
+            alt="Kailas Patil Speaking"
+            fill
+            className="object-cover object-[center_30%]"
+            priority
+          />
+          {/* Desktop Gradient Fade (Left to Right) */}
+          <div className="absolute inset-0 bg-gradient-to-r from-off-white via-off-white/80 to-transparent hidden md:block"></div>
+          {/* Mobile Gradient Fade (Bottom to Top and Top to Bottom) for readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-off-white via-off-white/90 to-off-white/60 md:hidden"></div>
+        </div>
+
+        <Container className="relative z-10 h-full flex flex-col justify-center">
+          <div className="w-full md:w-1/2 lg:w-[55%]">
             <SectionTitle 
               title="माझा प्रवास"
               eyebrow="एक संघर्षशील नेतृत्व"
               subtitle="एका सामान्य शेतकरी कुटुंबातून आलेले नेतृत्व ते धाराशिवचे आमदार. जनतेच्या सेवेसाठी समर्पित असलेला हा प्रवास."
-              className="text-white"
+              align="left"
+              className="text-dark [&>p]:text-dark/80 [&>span]:text-primary"
             />
           </div>
         </Container>
