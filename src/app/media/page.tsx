@@ -3,8 +3,8 @@ import { SectionTitle } from "@/components/typography/section-title";
 import { Metadata } from "next";
 import { newsArticles } from "@/data/news";
 import Image from "next/image";
-import { MediaPlaceholder } from "@/components/ui/media-placeholder";
 import { ArrowUpRight } from "lucide-react";
+import { mediaRegistry } from "@/data/media";
 
 export const metadata: Metadata = {
   title: "मीडिया | Media & Press | Kailas Dada Patil",
@@ -14,10 +14,24 @@ export const metadata: Metadata = {
 export default function MediaPage() {
   const featuredNews = newsArticles[0];
   const regularNews = newsArticles.slice(1);
+  const bgImage = mediaRegistry.journey?.interaction;
 
   return (
-    <div className="pt-32 pb-24 min-h-screen bg-off-white">
-      <Container>
+    <div className="relative pt-32 pb-24 min-h-screen bg-off-white overflow-hidden">
+      
+      {/* Background Image Watermark */}
+      {bgImage?.status === "available" && (
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Image 
+            src={bgImage.src} 
+            alt="Background" 
+            fill 
+            className="object-cover opacity-[0.08] grayscale" 
+          />
+        </div>
+      )}
+
+      <Container className="relative z-10">
         <SectionTitle 
           title="मीडिया आणि बातम्या"
           eyebrow="माध्यमांतून"
