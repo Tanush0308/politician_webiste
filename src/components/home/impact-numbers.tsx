@@ -21,14 +21,14 @@ export function ImpactNumbers() {
             src={impactBg}
             alt=""
             fill
-            className="object-cover opacity-[0.15] grayscale mix-blend-overlay"
+            className="object-cover opacity-40"
           />
         )}
-        <div className="absolute inset-0 bg-dark/80"></div>
+        <div className="absolute inset-0 bg-dark/70"></div>
       </div>
 
       <Container className="relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto">
           {impactMetrics.slice(0, 4).map((item, index) => (
             <motion.div 
               key={index}
