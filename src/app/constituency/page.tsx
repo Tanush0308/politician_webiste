@@ -14,24 +14,25 @@ export default function ConstituencyPage() {
   return (
     <div className="min-h-screen bg-off-white">
       <div className="relative pt-32 pb-32 border-b border-border overflow-hidden bg-dark">
-        {mediaRegistry.people.interaction2.status === "available" && (
-          <div className="absolute inset-0 z-0 pointer-events-none">
-            <Image 
-              src={mediaRegistry.people.interaction2.src} 
-              alt="Constituency Background"
-              fill
-              className="object-cover object-[center_30%]"
-            />
-            <div className="absolute inset-0 z-0 bg-dark/50"></div>
-          </div>
-        )}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Image 
+            src="/images/real/constituency_hero.jpg" 
+            alt="Constituency Background"
+            fill
+            className="object-cover object-center"
+            priority
+          />
+          {/* Light overlay to keep the image very clear while maintaining text readability */}
+          <div className="absolute inset-0 z-0 bg-dark/40 bg-gradient-to-t from-dark/60 via-transparent to-transparent"></div>
+        </div>
+        
         <Container className="relative z-10">
-          <div className="text-white drop-shadow-md">
+          <div className="text-white drop-shadow-xl">
             <SectionTitle 
               title="माझा मतदारसंघ"
               eyebrow="उस्मानाबाद - कळंब"
               subtitle={constituencyData.description}
-              className="mb-16 text-white"
+              className="mb-16 text-white [&>p]:drop-shadow-lg [&>p]:font-medium"
             />
           </div>
         </Container>
