@@ -17,16 +17,16 @@ export function FeaturedInitiatives() {
   if (initiatives.length === 0) return null;
 
   return (
-    <section className="relative py-24 bg-off-white overflow-hidden text-dark border-y border-border">
+    <section className="relative py-24 bg-[#FDF8F5] overflow-hidden text-dark border-y border-border">
       
       {/* Light Theme Background Layer */}
       {isElectionMediaAvailable && (
-        <div className="absolute inset-0 z-0 pointer-events-none mix-blend-multiply opacity-[0.03]">
+        <div className="absolute inset-0 z-0 pointer-events-none">
           <Image 
             src={electionMedia.src}
             alt={electionMedia.alt || "Background"}
             fill
-            className="object-cover grayscale"
+            className="object-cover opacity-[0.08] grayscale"
           />
         </div>
       )}
