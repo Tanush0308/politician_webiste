@@ -14,12 +14,12 @@ export function PeopleSection() {
     <section className="py-24 md:py-32 bg-off-white text-dark relative border-b border-border overflow-hidden">
       {/* Background Image Watermark */}
       {mediaRegistry.journey.interaction.status === "available" && (
-        <div className="absolute inset-0 z-0 pointer-events-none mix-blend-multiply opacity-[0.03]">
+        <div className="absolute inset-0 z-0 pointer-events-none">
           <Image 
             src={mediaRegistry.journey.interaction.src} 
             alt="Crowd Background"
             fill
-            className="object-cover object-center"
+            className="object-cover object-center opacity-[0.15] grayscale"
           />
         </div>
       )}
