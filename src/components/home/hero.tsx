@@ -13,7 +13,7 @@ export function Hero() {
   const heroMedia = mediaRegistry.hero.main;
 
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-24 pb-16 overflow-hidden">
+    <section className="relative min-h-[75vh] flex items-center pt-28 pb-12 overflow-hidden">
       
       {/* Background Video Layer */}
       <div className="absolute inset-0 z-0">
@@ -42,33 +42,33 @@ export function Hero() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="w-full lg:w-1/2 flex flex-col"
           >
-            <div className="inline-flex items-center gap-3 px-4 py-2 bg-white border border-[#EFE6DA] shadow-sm mb-8 self-start">
+            <div className="inline-flex items-center gap-3 px-4 py-2 bg-white border border-[#EFE6DA] shadow-sm mb-6 self-start">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
               <span className="text-sm font-bold tracking-widest text-[#151515] uppercase font-sans">
                 {personData.party}
               </span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-[#151515] leading-[1.1] mb-6 tracking-tight drop-shadow-sm">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-[#151515] leading-[1.1] mb-4 tracking-tight drop-shadow-sm">
               <span className="block mb-2">{personData.nameMr.split(' ')[0]} {personData.nameMr.split(' ')[1]}</span>
               <span className="text-primary">{personData.nameMr.split(' ')[2]}</span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-[#333333] font-medium leading-relaxed max-w-2xl mb-12 font-sans drop-shadow-sm">
+            <p className="text-lg md:text-xl text-[#333333] font-medium leading-relaxed max-w-2xl mb-10 font-sans drop-shadow-sm">
               {personData.designation}
             </p>
 
-            <div className="flex flex-wrap items-center gap-6">
+            <div className="flex flex-wrap items-center gap-4">
               <Link 
                 href="/initiatives" 
-                className="bg-primary text-white hover:bg-[#C85C32] px-8 py-4 text-base font-bold transition-colors shadow-md"
+                className="bg-primary text-white hover:bg-[#C85C32] px-6 py-3 text-sm font-bold transition-colors shadow-md"
               >
                 माझी कामं पहा
               </Link>
               
               <Link 
                 href="/journey" 
-                className="bg-white/80 backdrop-blur-sm border border-[#151515] text-[#151515] hover:bg-[#151515] hover:text-white px-8 py-4 text-base font-bold transition-all"
+                className="bg-white/80 backdrop-blur-sm border border-[#151515] text-[#151515] hover:bg-[#151515] hover:text-white px-6 py-3 text-sm font-bold transition-all"
               >
                 माझा प्रवास
               </Link>
@@ -80,9 +80,9 @@ export function Hero() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="w-full lg:w-1/2 relative aspect-[4/5] md:aspect-square lg:aspect-[3/4] max-h-[700px]"
+            className="w-full lg:w-1/2 relative aspect-[4/5] md:aspect-square lg:aspect-[3/4] max-h-[500px]"
           >
-            <div className="absolute inset-0 p-4 md:p-6 transform rotate-2">
+            <div className="absolute inset-0 p-4 transform rotate-2">
               <div className="relative w-full h-full overflow-hidden border border-border shadow-sm">
                 {heroMedia.status === "available" ? (
                   <Image 
