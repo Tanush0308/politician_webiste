@@ -51,7 +51,7 @@ export default function JourneyPage() {
 
   return (
     <div className="bg-off-white min-h-screen">
-      <div className="relative pt-32 pb-32 md:pt-40 md:pb-40 border-b border-border overflow-hidden bg-off-white">
+      <div className="relative pt-32 pb-32 md:pt-40 md:pb-40 border-b border-border overflow-hidden bg-gradient-to-r from-[#FFE5D4] to-[#FFF4EC]">
         
         {/* Right Side Image with Fade */}
         <div className="absolute inset-y-0 right-0 w-full md:w-[60%] lg:w-[50%] z-0">
@@ -59,13 +59,13 @@ export default function JourneyPage() {
             src="/images/real/journey_hero_mic.jpg" 
             alt="Kailas Patil Speaking"
             fill
-            className="object-cover object-[center_30%]"
+            className="object-cover object-top"
             priority
           />
           {/* Desktop Gradient Fade (Left to Right) */}
-          <div className="absolute inset-0 bg-gradient-to-r from-off-white via-off-white/80 to-transparent hidden md:block"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FFF4EC] via-[#FFF4EC]/80 to-transparent hidden md:block"></div>
           {/* Mobile Gradient Fade (Bottom to Top and Top to Bottom) for readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-off-white via-off-white/90 to-off-white/60 md:hidden"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#FFF4EC] via-[#FFF4EC]/90 to-[#FFF4EC]/60 md:hidden"></div>
         </div>
 
         <Container className="relative z-10 h-full flex flex-col justify-center">
